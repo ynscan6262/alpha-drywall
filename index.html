@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpha Drywall and Renovation | In Search for Excellence</title>
+  <meta name="description" content="Professional drywall installation, framing, renovation services in Toronto & GTA. Licensed, insured, and committed to excellence.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3DA9F5',
+            charcoal: '#2B2B2B',
+            gold: '#C9A96E',
+            offwhite: '#F5F5F5',
+            lightgray: '#E8E8E8',
+            darktext: '#1A1A1A',
+            muted: '#6B7280',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #1A1A1A; }
+    h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* Navbar */
+    #navbar { transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease; }
+    #navbar.scrolled {
+      background: rgba(27, 27, 27, 0.97) !important;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+      padding-top: 0.75rem !important;
+      padding-bottom: 0.75rem !important;
+    }
+    #navbar.solid { background: #2B2B2B !important; }
+
+    /* Hero */
+    .hero-overlay {
+      background: linear-gradient(
+        160deg,
+        rgba(10,10,10,0.72) 0%,
+        rgba(27,27,27,0.55) 50%,
+        rgba(43,43,43,0.82) 100%
+      );
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-1 { animation: fadeUp 0.8s ease both; }
+    .anim-2 { animation: fadeUp 0.8s 0.18s ease both; }
+    .anim-3 { animation: fadeUp 0.8s 0.34s ease both; }
+    .anim-4 { animation: fadeUp 0.8s 0.50s ease both; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(9px); }
+    }
+    .bounce-anim { animation: bounce 2.2s infinite; }
+
+    /* Cards */
+    .card-hover { transition: transform 0.28s ease, box-shadow 0.28s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 22px 45px rgba(0,0,0,0.13); }
+
+    /* Gallery */
+    .gal-img { transition: transform 0.55s ease; }
+    .gal-wrap:hover .gal-img { transform: scale(1.07); }
+
+    /* Gold divider */
+    .divider {
+      width: 52px; height: 3px;
+      background: linear-gradient(90deg, #C9A96E, #e8c98a);
+      border-radius: 2px;
+    }
+    .divider-left { margin: 14px 0; }
+    .divider-center { margin: 14px auto; }
+
+    /* Inputs */
+    .f-input {
+      width: 100%; padding: 11px 15px;
+      border: 1.5px solid #E8E8E8; border-radius: 7px;
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      background: #fff; transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .f-input:focus {
+      border-color: #3DA9F5;
+      box-shadow: 0 0 0 3px rgba(61,169,245,0.12);
+    }
+
+
+    /* Mobile drawer */
+    #mobile-drawer {
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+    }
+    #mobile-drawer.open { transform: translateX(0); }
+
+    /* CTA gradient */
+    .cta-bg {
+      background: linear-gradient(135deg, #3DA9F5 0%, #2390d9 100%);
+    }
+
+    /* Stat card glow on hover */
+    .stat-card { transition: border-color 0.25s, transform 0.25s; }
+    .stat-card:hover { border-color: rgba(61,169,245,0.6) !important; transform: translateY(-3px); }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.94);
+      z-index: 999; display: none;
+      align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+
+    /* Page hero separator */
+    .page-hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #3DA9F5, #C9A96E);
+    }
+
+    /* Active nav */
+    .nav-a.active, .nav-a:hover { color: #3DA9F5 !important; }
+
+    /* Services row alternation */
+    .srv-row:nth-child(even) .srv-img { order: -1; }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Logo SVG text fix */
+    .logo-svg text { dominant-baseline: auto; }
+    .logo-img { display: block; }
+  </style>
+</head>
+<body class="bg-white">
+
+<!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-0">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+
+    <!-- Logo -->
+    <button onclick="go('home')" class="flex items-center gap-0 flex-shrink-0">
+      <img src="logo-transparent.png" alt="Alpha Drywall and Renovation" class="logo-img h-16 w-auto">
+    </button>
+
+    <!-- Desktop links -->
+    <div class="hidden lg:flex items-center gap-7">
+      <button onclick="go('home')"         class="nav-a text-white/90 text-sm font-medium tracking-wide transition-colors" data-p="home">Home</button>
+      <button onclick="go('about')"        class="nav-a text-white/90 text-sm font-medium tracking-wide transition-colors" data-p="about">About</button>
+      <div class="relative group">
+        <button onclick="go('services')"   class="nav-a text-white/90 text-sm font-medium tracking-wide transition-colors flex items-center gap-1" data-p="services">
+          Services <i class="ri-arrow-down-s-line text-base leading-none mt-0.5"></i>
+        </button>
+        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
+          <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 shadow-sm rounded-sm z-[-1]"></div>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Drywall Installation</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Framing</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Taping &amp; Mudding</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Sanding &amp; Finishing</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Basement Renovation</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Painting</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Ceiling Work</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">General Renovation</button>
+        </div>
+      </div>
+      <button onclick="go('gallery')"      class="nav-a text-white/90 text-sm font-medium tracking-wide transition-colors" data-p="gallery">Gallery</button>
+      <button onclick="go('contact')"      class="nav-a text-white/90 text-sm font-medium tracking-wide transition-colors" data-p="contact">Contact</button>
+      <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-all shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 transform">
+        Get a Free Quote
+      </button>
+    </div>
+
+    <!-- Hamburger -->
+    <button id="ham-btn" onclick="toggleDrawer()" class="lg:hidden text-white text-2xl w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors">
+      <i id="ham-icon" class="ri-menu-3-line"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div id="mobile-drawer" class="fixed top-0 right-0 h-full w-72 bg-charcoal z-[100] shadow-2xl flex flex-col">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
+    <img src="logo-transparent.png" alt="Alpha Drywall and Renovation" class="logo-img h-14 w-auto">
+    <button onclick="toggleDrawer()" class="text-white/60 hover:text-white text-xl"><i class="ri-close-line"></i></button>
+  </div>
+  <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+    <button onclick="go('home');toggleDrawer()"         class="block w-full text-left text-white/80 hover:text-white hover:bg-white/8 py-3 px-4 rounded-xl transition-colors font-medium text-sm">Home</button>
+    <button onclick="go('about');toggleDrawer()"        class="block w-full text-left text-white/80 hover:text-white hover:bg-white/8 py-3 px-4 rounded-xl transition-colors font-medium text-sm">About</button>
+    <button onclick="go('services');toggleDrawer()"     class="block w-full text-left text-white/80 hover:text-white hover:bg-white/8 py-3 px-4 rounded-xl transition-colors font-medium text-sm">Services</button>
+    <button onclick="go('gallery');toggleDrawer()"      class="block w-full text-left text-white/80 hover:text-white hover:bg-white/8 py-3 px-4 rounded-xl transition-colors font-medium text-sm">Gallery</button>
+    <button onclick="go('contact');toggleDrawer()"      class="block w-full text-left text-white/80 hover:text-white hover:bg-white/8 py-3 px-4 rounded-xl transition-colors font-medium text-sm">Contact</button>
+  </nav>
+  <div class="px-4 pb-8">
+    <button onclick="go('quote');toggleDrawer()" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm hover:bg-blue-400 transition-colors">
+      Get a Free Quote
+    </button>
+  </div>
+</div>
+<div id="drawer-overlay" onclick="toggleDrawer()" class="fixed inset-0 bg-black/50 z-[99] hidden"></div>
+
+
+<!-- ═══════════════════════════════ PAGES ═══════════════════════════════ -->
+<div id="app">
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ HOME ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img id="hero-img" src="1743102911689.jpeg"
+           alt="Alpha Drywall — professional curved ceiling framing"
+           class="w-full h-full object-cover object-center">
+    </div>
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto pt-24">
+      <p class="anim-1 text-gold text-xs font-bold tracking-[5px] uppercase mb-5">Toronto · Ontario · Canada</p>
+      <h1 id="hero-h1" class="anim-2 text-5xl sm:text-6xl md:text-7xl font-black leading-[1.05] mb-6">
+        Professional Drywall<br>
+        <span class="text-primary">&amp; Renovation</span><br>
+        Services
+      </h1>
+      <p id="hero-tagline" class="anim-3 text-xl md:text-2xl italic text-white/75 mb-3" style="font-family:'Inter',sans-serif; font-weight:300;">
+        "In Search for Excellence"
+      </p>
+      <p id="hero-sub" class="anim-3 text-base md:text-lg text-white/60 max-w-xl mx-auto mb-11" style="font-family:'Inter',sans-serif;">
+        Quality craftsmanship for residential &amp; commercial projects across the Greater Toronto Area.
+      </p>
+      <div class="anim-4 flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="go('quote')"
+          class="bg-primary hover:bg-blue-400 text-white px-9 py-4 rounded-lg font-bold text-sm tracking-wide shadow-xl shadow-primary/30 hover:-translate-y-0.5 transform transition-all">
+          Get a Free Quote
+        </button>
+        <button onclick="go('services')"
+          class="border-2 border-gold/80 text-gold hover:bg-gold hover:text-charcoal px-9 py-4 rounded-lg font-bold text-sm tracking-wide transition-all">
+          Our Services
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 bounce-anim flex flex-col items-center gap-1">
+      <span class="text-[10px] tracking-[3px] uppercase">Scroll</span>
+      <i class="ri-arrow-down-line text-xl"></i>
+    </div>
+
+    <!-- Floating badge -->
+    <div class="absolute bottom-12 right-8 hidden md:flex items-center gap-3 bg-charcoal/80 backdrop-blur-sm border border-white/10 rounded-2xl px-5 py-3">
+      <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+        <i class="ri-shield-check-line text-primary text-sm"></i>
+      </div>
+      <div>
+        <p class="text-white text-xs font-bold">Licensed &amp; Insured</p>
+        <p class="text-white/50 text-[10px]">Toronto, ON</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-16">
+        <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-3 reveal">What We Do</p>
+        <h2 class="text-4xl md:text-5xl font-black text-darktext mb-2 reveal">Our Services</h2>
+        <div class="divider divider-center reveal"></div>
+        <p class="text-muted max-w-lg mx-auto mt-4 reveal">Expert craftsmanship across a full range of drywall and renovation services.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-13 h-13 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-layout-grid-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Drywall Installation</h3>
+          <p class="text-muted text-sm leading-relaxed">Precision installation for new builds and renovations, including complex curved designs.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-building-4-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Framing</h3>
+          <p class="text-muted text-sm leading-relaxed">Steel &amp; wood framing systems for partitions, soffits, and complete structural builds.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-paint-brush-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Taping &amp; Mudding</h3>
+          <p class="text-muted text-sm leading-relaxed">Seamless joint finishing that creates a flawless, paint-ready surface every time.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-home-4-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Basement Renovation</h3>
+          <p class="text-muted text-sm leading-relaxed">Transform unfinished basements into beautiful, fully functional living spaces.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-scissors-cut-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Sanding &amp; Finishing</h3>
+          <p class="text-muted text-sm leading-relaxed">Meticulous sanding to Level 5 perfection — the finest finish in the industry.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-tools-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Ceiling Work</h3>
+          <p class="text-muted text-sm leading-relaxed">Custom ceiling systems — coffered, tray, feature designs, and drop ceilings.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-palette-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">Painting</h3>
+          <p class="text-muted text-sm leading-relaxed">Interior painting with premium materials for a lasting, professional result.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+            <i class="ri-hammer-line text-2xl text-primary group-hover:text-white transition-colors"></i>
+          </div>
+          <h3 class="text-base font-bold mb-2 text-darktext">General Renovation</h3>
+          <p class="text-muted text-sm leading-relaxed">Full-scope renovation management for residential and commercial properties.</p>
+          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+        </div>
+
+      </div>
+      <div class="text-center mt-12 reveal">
+        <button onclick="go('services')" class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all">
+          View All Services
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="py-24 bg-charcoal text-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal">
+          <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-4">Who We Are</p>
+          <h2 class="text-4xl md:text-5xl font-black leading-tight mb-5">
+            Built on Quality,<br>
+            Driven by <span class="text-primary">Excellence</span>
+          </h2>
+          <div class="divider divider-left mb-7"></div>
+          <p id="about-p1" class="text-white/65 text-lg leading-relaxed mb-5">
+            Alpha Drywall and Renovation has been proudly serving Toronto and the Greater Toronto Area with an unwavering commitment to quality craftsmanship. We specialize in drywall, framing, finishing, and full-scale renovations for residential and commercial clients.
+          </p>
+          <p id="about-p2" class="text-white/55 leading-relaxed mb-9">
+            Every project reflects our guiding principle — <em class="text-gold not-italic font-semibold">"In Search for Excellence."</em> We don't just meet expectations — we exceed them.
+          </p>
+          <button onclick="go('about')" class="bg-primary hover:bg-blue-400 text-white px-7 py-3.5 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/25">
+            Learn More About Us
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 reveal">
+          <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+            <div id="stat0-val" class="text-5xl font-black text-primary mb-2" style="font-family:'Montserrat',sans-serif;">10+</div>
+            <div id="stat0-lbl" class="text-gold text-[10px] font-bold tracking-[3px] uppercase">Years Experience</div>
+          </div>
+          <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+            <div id="stat1-val" class="text-5xl font-black text-primary mb-2" style="font-family:'Montserrat',sans-serif;">500+</div>
+            <div id="stat1-lbl" class="text-gold text-[10px] font-bold tracking-[3px] uppercase">Projects Done</div>
+          </div>
+          <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+            <div id="stat2-val" class="text-5xl font-black text-primary mb-2" style="font-family:'Montserrat',sans-serif;">300+</div>
+            <div id="stat2-lbl" class="text-gold text-[10px] font-bold tracking-[3px] uppercase">Happy Clients</div>
+          </div>
+          <div class="stat-card bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+            <div id="stat3-val" class="text-5xl font-black text-primary mb-2" style="font-family:'Montserrat',sans-serif;">100%</div>
+            <div id="stat3-lbl" class="text-gold text-[10px] font-bold tracking-[3px] uppercase">Satisfaction Rate</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="py-24 bg-offwhite">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-14">
+        <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-3 reveal">Portfolio</p>
+        <h2 class="text-4xl md:text-5xl font-black text-darktext mb-2 reveal">Our Recent Work</h2>
+        <div class="divider divider-center reveal"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 reveal">
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer aspect-square" onclick="go('gallery')">
+          <img src="1743102911689.jpeg" alt="Curved ceiling framing" class="gal-img w-full h-full object-cover">
+        </div>
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer aspect-square" onclick="go('gallery')">
+          <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="Arched drywall corridor" class="gal-img w-full h-full object-cover">
+        </div>
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer aspect-square" onclick="go('gallery')">
+          <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="Professional craftsman" class="gal-img w-full h-full object-cover">
+        </div>
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer aspect-square" onclick="go('gallery')">
+          <img src="1743102917963.jpeg" alt="Drywall panels" class="gal-img w-full h-full object-cover">
+        </div>
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer aspect-square" onclick="go('gallery')">
+          <img src="1743102914968.jpeg" alt="Curved drywall technique" class="gal-img w-full h-full object-cover">
+        </div>
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer aspect-square" onclick="go('gallery')">
+          <img src="1743102912283.jpeg" alt="Corner detail work" class="gal-img w-full h-full object-cover">
+        </div>
+      </div>
+
+      <div class="text-center mt-10 reveal">
+        <button onclick="go('gallery')" class="bg-charcoal hover:bg-darktext text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all">
+          View Full Gallery
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-bg py-24">
+    <div class="max-w-4xl mx-auto text-center px-5">
+      <h2 id="cta-h2" class="text-4xl md:text-5xl font-black text-white mb-4 reveal">Ready to Start Your Project?</h2>
+      <p id="cta-sub" class="text-white/75 text-lg mb-9 reveal">Get a free, no-obligation estimate. Serving Toronto &amp; the Greater Toronto Area.</p>
+      <button onclick="go('quote')" class="reveal bg-white text-primary hover:bg-offwhite px-11 py-4 rounded-lg font-black text-base transition-all shadow-2xl hover:-translate-y-0.5 transform">
+        Get a Free Quote
+      </button>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ABOUT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-about" class="page">
+
+  <!-- Page Hero -->
+  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="" class="w-full h-full object-cover object-[60%_20%] opacity-25">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
+      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">About Us</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white">Our Story</h1>
+    </div>
+  </div>
+
+  <!-- Story -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <div>
+          <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-3">Our Journey</p>
+          <h2 class="text-3xl md:text-4xl font-black text-darktext mb-5">A Commitment to Craft</h2>
+          <div class="divider divider-left mb-7"></div>
+          <p class="text-muted leading-relaxed mb-4">Founded with a simple but powerful mission — to deliver drywall and renovation services that truly stand out — Alpha Drywall and Renovation has grown into one of Toronto's trusted names in construction finishing work.</p>
+          <p class="text-muted leading-relaxed mb-4">Our team brings years of hands-on experience, combining traditional craftsmanship with modern techniques and materials. Whether it's a simple repair or a complex commercial renovation, we approach every project with the same dedication.</p>
+          <p class="text-muted leading-relaxed"><em class="text-gold not-italic font-semibold">"In Search for Excellence"</em> — this isn't just our slogan. It's the principle guiding every cut, every joint, and every finished surface we deliver.</p>
+        </div>
+        <div class="relative">
+          <div class="absolute -top-3 -left-3 -right-0 bottom-3 border-2 border-gold/40 rounded-2xl pointer-events-none"></div>
+          <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="Alpha Drywall work in progress" class="rounded-2xl shadow-2xl w-full relative z-10">
+        </div>
+      </div>
+
+      <!-- Why Choose Us -->
+      <div class="text-center mb-12">
+        <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-3">Why Alpha?</p>
+        <h2 class="text-3xl md:text-4xl font-black text-darktext mb-3">Why Choose Us</h2>
+        <div class="divider divider-center"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center p-7 rounded-2xl hover:bg-offwhite transition-colors">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <i class="ri-shield-check-line text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-bold text-darktext mb-2">Licensed &amp; Insured</h3>
+          <p class="text-muted text-sm leading-relaxed">Fully licensed with comprehensive liability insurance for complete peace of mind.</p>
+        </div>
+        <div class="text-center p-7 rounded-2xl hover:bg-offwhite transition-colors">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <i class="ri-award-line text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-bold text-darktext mb-2">10+ Years Experience</h3>
+          <p class="text-muted text-sm leading-relaxed">Over a decade of exceptional drywall and renovation results across the GTA.</p>
+        </div>
+        <div class="text-center p-7 rounded-2xl hover:bg-offwhite transition-colors">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <i class="ri-verified-badge-line text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-bold text-darktext mb-2">Premium Materials</h3>
+          <p class="text-muted text-sm leading-relaxed">Only the finest drywall boards, compounds, and materials from trusted manufacturers.</p>
+        </div>
+        <div class="text-center p-7 rounded-2xl hover:bg-offwhite transition-colors">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <i class="ri-time-line text-2xl text-primary"></i>
+          </div>
+          <h3 class="font-bold text-darktext mb-2">On Time, On Budget</h3>
+          <p class="text-muted text-sm leading-relaxed">We respect your timeline and budget — delivering as promised with zero surprises.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-bg py-16">
+    <div class="max-w-3xl mx-auto text-center px-5">
+      <h2 class="text-3xl font-black text-white mb-3">Let's Build Something Great Together</h2>
+      <p class="text-white/70 mb-7">Ready to experience the Alpha difference? Get in touch today.</p>
+      <button onclick="go('quote')" class="bg-white text-primary hover:bg-offwhite px-9 py-3.5 rounded-lg font-black text-sm transition-all">Get a Free Quote</button>
+    </div>
+  </section>
+
+</div><!-- /page-about -->
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SERVICES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-services" class="page">
+
+  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="1743102911689.jpeg" alt="" class="w-full h-full object-cover opacity-25">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
+      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">What We Offer</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white">Our Services</h1>
+    </div>
+  </div>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <p class="text-center text-muted max-w-2xl mx-auto mb-14">From drywall to complete renovations, we offer a comprehensive range of services for residential and commercial clients across Toronto.</p>
+
+      <div class="space-y-5">
+
+        <!-- Row 1 -->
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+          <div class="p-10 md:p-12">
+            <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-layout-grid-line text-xl text-primary"></i></div>
+            <h3 class="text-2xl font-black text-darktext mb-3">Drywall Installation</h3>
+            <div class="divider divider-left mb-5"></div>
+            <p class="text-muted leading-relaxed mb-5 text-sm">Whether you're building new or renovating, our installation service delivers precision results — from standard flat walls to complex curved and custom designs.</p>
+            <ul class="space-y-2 text-muted text-sm mb-7">
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> New construction &amp; renovation drywall</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Curved, arched &amp; custom shapes</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Water-resistant &amp; fire-rated boards</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Residential &amp; commercial projects</li>
+            </ul>
+            <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
+          </div>
+          <div class="min-h-[280px] lg:min-h-0">
+            <img src="1743102911689.jpeg" alt="Drywall Installation" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
+            <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="Framing" class="w-full h-full object-cover">
+          </div>
+          <div class="p-10 md:p-12 order-1 lg:order-2">
+            <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-building-4-line text-xl text-primary"></i></div>
+            <h3 class="text-2xl font-black text-darktext mb-3">Framing</h3>
+            <div class="divider divider-left mb-5"></div>
+            <p class="text-muted leading-relaxed mb-5 text-sm">Our framing services provide the structural foundation for walls and ceilings. We work with both steel stud and wood framing for any project type or scale.</p>
+            <ul class="space-y-2 text-muted text-sm mb-7">
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Steel stud &amp; wood framing</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Interior partition walls</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Soffit &amp; bulkhead framing</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Load-bearing &amp; non-load-bearing</li>
+            </ul>
+            <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+          <div class="p-10 md:p-12">
+            <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-paint-brush-line text-xl text-primary"></i></div>
+            <h3 class="text-2xl font-black text-darktext mb-3">Taping &amp; Mudding</h3>
+            <div class="divider divider-left mb-5"></div>
+            <p class="text-muted leading-relaxed mb-5 text-sm">The difference between average and exceptional lies in the taping and mudding. Our experienced tapers deliver smooth, seamless joints with Level 4 &amp; 5 finishes.</p>
+            <ul class="space-y-2 text-muted text-sm mb-7">
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Paper &amp; mesh tape application</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Multi-coat joint compound</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Angle bead installation</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Level 4 &amp; 5 paint-ready finish</li>
+            </ul>
+            <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
+          </div>
+          <div class="min-h-[280px] lg:min-h-0">
+            <img src="1743102917963.jpeg" alt="Taping and Mudding" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- More services grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+        <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
+          <i class="ri-scissors-cut-line text-3xl text-primary mb-4 block"></i>
+          <h3 class="text-xl font-black mb-3">Sanding &amp; Finishing</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Meticulous sanding to Level 5 — the highest standard for a flawless, paint-ready surface on all walls and ceilings.</p>
+        </div>
+        <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
+          <i class="ri-home-4-line text-3xl text-primary mb-4 block"></i>
+          <h3 class="text-xl font-black mb-3">Basement Renovation</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Transform your unfinished basement into a beautiful, livable space. Full framing, drywall, and finishing included.</p>
+        </div>
+        <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
+          <i class="ri-palette-line text-3xl text-primary mb-4 block"></i>
+          <h3 class="text-xl font-black mb-3">Painting</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Interior painting with premium materials and expert application for a professional, lasting finish on every surface.</p>
+        </div>
+        <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
+          <i class="ri-tools-line text-3xl text-primary mb-4 block"></i>
+          <h3 class="text-xl font-black mb-3">Ceiling Work</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Custom ceiling solutions — coffered, tray, feature designs, drop systems, and seamless flat finishes.</p>
+        </div>
+        <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
+          <i class="ri-hammer-line text-3xl text-primary mb-4 block"></i>
+          <h3 class="text-xl font-black mb-3">General Renovation</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Full-scope renovation management for residential and commercial properties, from planning to perfect completion.</p>
+        </div>
+        <div class="cta-bg rounded-2xl p-8 text-white flex flex-col justify-between">
+          <div>
+            <i class="ri-customer-service-line text-3xl mb-4 block opacity-90"></i>
+            <h3 class="text-xl font-black mb-3">Don't See Your Project?</h3>
+            <p class="text-white/75 text-sm leading-relaxed mb-6">Contact us and we'll discuss how we can help with your specific renovation needs.</p>
+          </div>
+          <button onclick="go('contact')" class="bg-white text-primary hover:bg-offwhite px-6 py-2.5 rounded-lg text-sm font-bold transition-all self-start">Contact Us</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /page-services -->
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ GALLERY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-gallery" class="page">
+
+  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="" class="w-full h-full object-cover opacity-25">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
+      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">Our Work</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white">Project Gallery</h1>
+    </div>
+  </div>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <p class="text-center text-muted mb-12 max-w-2xl mx-auto">Browse our portfolio of completed drywall and renovation projects across Toronto and the Greater Toronto Area. Click any image to enlarge.</p>
+
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-4" style="column-gap:1rem;">
+
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer mb-4 break-inside-avoid" onclick="lb(this)">
+          <img src="1743102911689.jpeg" alt="Curved ceiling framing — commercial project" class="gal-img w-full">
+          <div class="px-5 py-4 bg-offwhite">
+            <h4 class="font-bold text-sm text-darktext">Curved Ceiling Framing</h4>
+            <p class="text-xs text-muted mt-0.5">Commercial · Toronto, ON</p>
+          </div>
+        </div>
+
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer mb-4 break-inside-avoid" onclick="lb(this)">
+          <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="Residential stairwell drywall" class="gal-img w-full">
+          <div class="px-5 py-4 bg-offwhite">
+            <h4 class="font-bold text-sm text-darktext">Stairwell Drywall Finishing</h4>
+            <p class="text-xs text-muted mt-0.5">Residential · North York, ON</p>
+          </div>
+        </div>
+
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer mb-4 break-inside-avoid" onclick="lb(this)">
+          <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="Arched doorway corridor" class="gal-img w-full">
+          <div class="px-5 py-4 bg-offwhite">
+            <h4 class="font-bold text-sm text-darktext">Arched Doorway Corridor</h4>
+            <p class="text-xs text-muted mt-0.5">Residential · Mississauga, ON</p>
+          </div>
+        </div>
+
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer mb-4 break-inside-avoid" onclick="lb(this)">
+          <img src="1743102917963.jpeg" alt="Panel installation" class="gal-img w-full">
+          <div class="px-5 py-4 bg-offwhite">
+            <h4 class="font-bold text-sm text-darktext">Panel Installation Prep</h4>
+            <p class="text-xs text-muted mt-0.5">Commercial · Toronto, ON</p>
+          </div>
+        </div>
+
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer mb-4 break-inside-avoid" onclick="lb(this)">
+          <img src="1743102914968.jpeg" alt="Custom curved drywall" class="gal-img w-full">
+          <div class="px-5 py-4 bg-offwhite">
+            <h4 class="font-bold text-sm text-darktext">Custom Curved Drywall</h4>
+            <p class="text-xs text-muted mt-0.5">Specialty Work · Toronto, ON</p>
+          </div>
+        </div>
+
+        <div class="gal-wrap rounded-2xl overflow-hidden cursor-pointer mb-4 break-inside-avoid" onclick="lb(this)">
+          <img src="1743102912283.jpeg" alt="Corner bead detail" class="gal-img w-full">
+          <div class="px-5 py-4 bg-offwhite">
+            <h4 class="font-bold text-sm text-darktext">Corner Bead Detail Work</h4>
+            <p class="text-xs text-muted mt-0.5">Finishing · GTA</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLb()">
+    <div class="relative max-w-5xl max-h-screen p-4" onclick="event.stopPropagation()">
+      <img id="lb-img" src="" alt="" class="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain">
+      <button onclick="closeLb()" class="absolute -top-1 -right-1 w-10 h-10 bg-white/15 hover:bg-white/25 text-white rounded-full flex items-center justify-center transition-colors">
+        <i class="ri-close-line text-lg"></i>
+      </button>
+    </div>
+  </div>
+
+</div><!-- /page-gallery -->
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONTACT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-contact" class="page">
+
+  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="1743102911689.jpeg" alt="" class="w-full h-full object-cover opacity-20">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
+      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">Get in Touch</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white">Contact Us</h1>
+    </div>
+  </div>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-3 gap-14">
+
+        <!-- Form -->
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-black text-darktext mb-1">Send Us a Message</h2>
+          <div class="divider divider-left mb-8"></div>
+          <form onsubmit="fContact(event)" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Full Name *</label>
+                <input type="text" class="f-input" placeholder="John Smith" required>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Email Address *</label>
+                <input type="email" class="f-input" placeholder="john@example.com" required>
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Phone Number</label>
+                <input type="tel" class="f-input" placeholder="(416) 555-0000">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Service Interested In</label>
+                <select class="f-input">
+                  <option value="">Select a service…</option>
+                  <option>Drywall Installation</option><option>Framing</option>
+                  <option>Taping &amp; Mudding</option><option>Sanding &amp; Finishing</option>
+                  <option>Basement Renovation</option><option>Painting</option>
+                  <option>Ceiling Work</option><option>General Renovation</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Message *</label>
+              <textarea class="f-input" style="height:140px;resize:none;" placeholder="Tell us about your project…" required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary hover:bg-blue-400 text-white py-4 rounded-lg font-black text-sm transition-all shadow-lg shadow-primary/25">
+              Send Message &nbsp;<i class="ri-send-plane-line"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Info -->
+        <div>
+          <h2 class="text-2xl font-black text-darktext mb-1">Contact Info</h2>
+          <div class="divider divider-left mb-8"></div>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><i class="ri-phone-line text-lg text-primary"></i></div>
+              <div><p class="text-xs font-bold text-darktext uppercase tracking-wider mb-1">Phone</p><a id="c-phone-link" href="tel:5551234567" class="text-primary hover:underline text-sm">(555) 123-4567</a></div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><i class="ri-mail-line text-lg text-primary"></i></div>
+              <div><p class="text-xs font-bold text-darktext uppercase tracking-wider mb-1">Email</p><a id="c-email-link" href="mailto:info@alphadrywall.com" class="text-primary hover:underline text-sm">info@alphadrywall.com</a></div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><i class="ri-map-pin-line text-lg text-primary"></i></div>
+              <div><p class="text-xs font-bold text-darktext uppercase tracking-wider mb-1">Service Area</p><p id="c-addr" class="text-muted text-sm">Toronto &amp; Greater Toronto Area,<br>Ontario, Canada</p></div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"><i class="ri-time-line text-lg text-primary"></i></div>
+              <div>
+                <p class="text-xs font-bold text-darktext uppercase tracking-wider mb-2">Business Hours</p>
+                <div id="c-hours-content">
+                  <p class="text-muted text-sm">Mon–Fri: 7:00 am – 6:00 pm</p>
+                  <p class="text-muted text-sm">Saturday: 8:00 am – 4:00 pm</p>
+                  <p class="text-muted text-sm">Sunday: Closed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-7 border-t border-lightgray">
+            <p class="text-xs font-bold text-darktext uppercase tracking-wider mb-4">Follow Us</p>
+            <div class="flex gap-3">
+              <a id="c-ig" href="#" class="w-10 h-10 rounded-xl bg-charcoal text-white flex items-center justify-center hover:bg-primary transition-colors"><i class="ri-instagram-line"></i></a>
+              <a id="c-fb" href="#" class="w-10 h-10 rounded-xl bg-charcoal text-white flex items-center justify-center hover:bg-primary transition-colors"><i class="ri-facebook-line"></i></a>
+              <a id="c-li" href="#" class="w-10 h-10 rounded-xl bg-charcoal text-white flex items-center justify-center hover:bg-primary transition-colors"><i class="ri-linkedin-line"></i></a>
+              <a id="c-gg" href="#" class="w-10 h-10 rounded-xl bg-charcoal text-white flex items-center justify-center hover:bg-primary transition-colors"><i class="ri-google-line"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-contact -->
+
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ QUOTE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-quote" class="page">
+
+  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="" class="w-full h-full object-cover object-[60%_center] opacity-28">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
+      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">Free Estimate</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white">Get a Free Quote</h1>
+    </div>
+  </div>
+
+  <section class="py-20 bg-offwhite">
+    <div class="max-w-2xl mx-auto px-5">
+      <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+        <div class="text-center mb-10">
+          <div class="w-14 h-14 rounded-2xl cta-bg flex items-center justify-center mx-auto mb-5">
+            <i class="ri-file-list-3-line text-white text-2xl"></i>
+          </div>
+          <h2 class="text-2xl font-black text-darktext mb-2">Tell Us About Your Project</h2>
+          <p class="text-muted text-sm">Fill out the form below and we'll respond within 24 hours with a free, no-obligation estimate.</p>
+        </div>
+        <form onsubmit="fQuote(event)" class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Full Name *</label>
+              <input type="text" class="f-input" placeholder="John Smith" required>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Email *</label>
+              <input type="email" class="f-input" placeholder="john@example.com" required>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Phone</label>
+              <input type="tel" class="f-input" placeholder="(416) 555-0000">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Service Type *</label>
+              <select class="f-input" required>
+                <option value="">Select a service…</option>
+                <option>Drywall Installation</option><option>Framing</option>
+                <option>Taping &amp; Mudding</option><option>Sanding &amp; Finishing</option>
+                <option>Basement Renovation</option><option>Painting</option>
+                <option>Ceiling Work</option><option>General Renovation</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Project Description *</label>
+            <textarea class="f-input" style="height:120px;resize:none;" placeholder="Describe your project — size, current state, desired outcome…" required></textarea>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Preferred Contact</label>
+              <select class="f-input"><option value="email">Email</option><option value="phone">Phone</option></select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Preferred Start Date</label>
+              <input type="date" class="f-input">
+            </div>
+          </div>
+          <button type="submit" class="w-full cta-bg text-white py-4 rounded-xl font-black text-sm transition-all shadow-lg shadow-primary/30 hover:-translate-y-0.5 transform">
+            Submit Quote Request &nbsp;<i class="ri-arrow-right-line"></i>
+          </button>
+          <p class="text-center text-xs text-muted">No obligation. We'll respond within 24 hours.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-quote -->
+
+</div><!-- /app -->
+
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer class="bg-charcoal text-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <!-- Brand -->
+      <div class="lg:col-span-2">
+        <img src="logo-transparent.png" alt="Alpha Drywall and Renovation" class="logo-img h-20 w-auto mb-5">
+        <p class="text-white/55 text-sm leading-relaxed mb-5 max-w-xs">
+          Professional drywall and renovation services in Toronto &amp; GTA. <em class="text-gold not-italic">"In Search for Excellence"</em> — on every project, every time.
+        </p>
+        <div class="flex gap-2.5">
+          <a id="f-ig" href="#" class="w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center hover:bg-primary transition-colors text-sm"><i class="ri-instagram-line"></i></a>
+          <a id="f-fb" href="#" class="w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center hover:bg-primary transition-colors text-sm"><i class="ri-facebook-line"></i></a>
+          <a id="f-li" href="#" class="w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center hover:bg-primary transition-colors text-sm"><i class="ri-linkedin-line"></i></a>
+          <a id="f-gg" href="#" class="w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center hover:bg-primary transition-colors text-sm"><i class="ri-google-line"></i></a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h4 class="text-[10px] font-black tracking-[4px] uppercase text-gold mb-5">Quick Links</h4>
+        <ul class="space-y-2.5">
+          <li><button onclick="go('home')"         class="text-white/55 text-sm hover:text-primary transition-colors">Home</button></li>
+          <li><button onclick="go('about')"        class="text-white/55 text-sm hover:text-primary transition-colors">About Us</button></li>
+          <li><button onclick="go('services')"     class="text-white/55 text-sm hover:text-primary transition-colors">Services</button></li>
+          <li><button onclick="go('gallery')"      class="text-white/55 text-sm hover:text-primary transition-colors">Gallery</button></li>
+          <li><button onclick="go('contact')"      class="text-white/55 text-sm hover:text-primary transition-colors">Contact</button></li>
+          <li><button onclick="go('quote')"        class="text-primary text-sm hover:text-blue-300 transition-colors font-semibold">Get a Free Quote →</button></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-[10px] font-black tracking-[4px] uppercase text-gold mb-5">Contact</h4>
+        <ul class="space-y-4">
+          <li class="flex gap-3"><i class="ri-phone-line text-primary mt-0.5 flex-shrink-0"></i><a id="f-phone-link" href="tel:5551234567" class="text-white/55 text-sm hover:text-primary transition-colors">(555) 123-4567</a></li>
+          <li class="flex gap-3"><i class="ri-mail-line text-primary mt-0.5 flex-shrink-0"></i><a id="f-email-link" href="mailto:info@alphadrywall.com" class="text-white/55 text-sm hover:text-primary transition-colors">info@alphadrywall.com</a></li>
+          <li class="flex gap-3"><i class="ri-map-pin-line text-primary mt-0.5 flex-shrink-0"></i><span id="f-addr" class="text-white/55 text-sm">Toronto, ON, Canada</span></li>
+        </ul>
+        <div class="mt-5 p-4 bg-white/5 rounded-xl border border-white/8">
+          <p class="text-[10px] font-bold tracking-[3px] uppercase text-gold mb-1">Serving</p>
+          <p class="text-white/55 text-sm">Toronto &amp; Greater Toronto Area</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="border-t border-white/8">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p class="text-white/35 text-xs">© 2024 Alpha Drywall and Renovation. All Rights Reserved.</p>
+      <p class="text-white/25 text-xs">Toronto, Ontario, Canada</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Toast -->
+<div id="toast" class="flex items-center gap-3 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl">
+  <i class="ri-checkbox-circle-line text-xl flex-shrink-0"></i>
+  <span id="toast-msg" class="text-sm font-medium"></span>
+</div>
+
+
+<!-- ═══════════════════════════════ SCRIPTS ═══════════════════════════════ -->
+<script>
+  // ── Navigation ──────────────────────────────────────────────
+  let current = 'home';
+
+  function go(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const el = document.getElementById('page-' + page);
+    if (!el) return;
+    el.classList.add('active');
+    current = page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    syncNav(page);
+    refreshReveal();
+  }
+
+  function syncNav(page) {
+    document.querySelectorAll('.nav-a').forEach(a => {
+      a.classList.toggle('active', a.dataset.p === page);
+    });
+    const nb = document.getElementById('navbar');
+    if (page === 'home') {
+      nb.classList.remove('solid');
+    } else {
+      nb.classList.add('solid');
+      nb.classList.remove('scrolled');
+    }
+  }
+
+  // ── Scroll / Navbar ──────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    const nb = document.getElementById('navbar');
+    if (current !== 'home') return;
+    if (window.scrollY > 60) {
+      nb.classList.add('scrolled');
+    } else {
+      nb.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // ── Mobile drawer ──────────────────────────────────────────
+  let drawerOpen = false;
+  function toggleDrawer() {
+    drawerOpen = !drawerOpen;
+    document.getElementById('mobile-drawer').classList.toggle('open', drawerOpen);
+    document.getElementById('drawer-overlay').classList.toggle('hidden', !drawerOpen);
+    document.getElementById('ham-icon').className = drawerOpen ? 'ri-close-line' : 'ri-menu-3-line';
+    document.body.style.overflow = drawerOpen ? 'hidden' : '';
+  }
+
+  // ── Lightbox ───────────────────────────────────────────────
+  function lb(wrap) {
+    const img = wrap.querySelector('img');
+    document.getElementById('lb-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  // ── Forms ──────────────────────────────────────────────────
+  function fContact(e) {
+    e.preventDefault();
+    toast("Message sent! We'll be in touch within 24 hours.");
+    e.target.reset();
+  }
+  function fQuote(e) {
+    e.preventDefault();
+    toast("Quote request received! We'll respond within 24 hours.");
+    e.target.reset();
+  }
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3800);
+  }
+
+  // ── Scroll reveal ───────────────────────────────────────────
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  function refreshReveal() {
+    setTimeout(() => {
+      document.querySelectorAll('#page-' + current + ' .reveal').forEach(el => {
+        revealObserver.observe(el);
+      });
+    }, 80);
+  }
+
+  // ── Init ───────────────────────────────────────────────────
+  go('home');
+</script>
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║                     ADMIN PANEL                         ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+
+<!-- Admin overlay — covers entire viewport when active -->
+<div id="admin-root" style="display:none; position:fixed; inset:0; z-index:200; font-family:'Inter',sans-serif;">
+
+<!-- ─── ADMIN LOGIN ─── -->
+<div id="admin-login" style="
+  display:flex; align-items:center; justify-content:center;
+  min-height:100vh; background:linear-gradient(135deg,#1a1a1a 0%,#2B2B2B 100%);
+">
+  <div style="width:100%; max-width:400px; padding:0 24px;">
+    <div style="background:#fff; border-radius:20px; padding:40px; box-shadow:0 25px 60px rgba(0,0,0,0.4);">
+      <div style="text-align:center; margin-bottom:32px;">
+        <img src="logo-transparent.png" alt="Alpha Drywall" style="height:56px; width:auto; margin-bottom:16px; filter:invert(1);">
+        <h2 style="font-family:'Montserrat',sans-serif; font-size:20px; font-weight:800; color:#1A1A1A; margin:0 0 4px;">Admin Panel</h2>
+        <p style="color:#6B7280; font-size:13px; margin:0;">Sign in to manage your website</p>
+      </div>
+      <div id="login-error" style="display:none; background:#FEF2F2; border:1px solid #FECACA; color:#DC2626; padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:16px;">
+        <i class="ri-error-warning-line"></i> Invalid email or password.
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="display:block; font-size:11px; font-weight:700; color:#1A1A1A; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Email</label>
+        <input id="login-email" type="email" placeholder="admin@alphadrywall.com" style="width:100%; padding:11px 14px; border:1.5px solid #E8E8E8; border-radius:8px; font-size:14px; outline:none; font-family:'Inter',sans-serif; box-sizing:border-box;" onfocus="this.style.borderColor='#3DA9F5'" onblur="this.style.borderColor='#E8E8E8'">
+      </div>
+      <div style="margin-bottom:24px;">
+        <label style="display:block; font-size:11px; font-weight:700; color:#1A1A1A; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Password</label>
+        <input id="login-pass" type="password" placeholder="••••••••" style="width:100%; padding:11px 14px; border:1.5px solid #E8E8E8; border-radius:8px; font-size:14px; outline:none; font-family:'Inter',sans-serif; box-sizing:border-box;" onfocus="this.style.borderColor='#3DA9F5'" onblur="this.style.borderColor='#E8E8E8'" onkeydown="if(event.key==='Enter')adminLogin()">
+      </div>
+      <button onclick="adminLogin()" style="width:100%; background:linear-gradient(135deg,#3DA9F5,#2390d9); color:#fff; border:none; padding:13px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif; letter-spacing:0.5px;">
+        Sign In
+      </button>
+      <p style="text-align:center; margin-top:16px; font-size:12px; color:#9CA3AF;">
+        Demo: admin@alphadrywall.com / admin123
+      </p>
+    </div>
+    <p style="text-align:center; margin-top:20px; color:rgba(255,255,255,0.4); font-size:12px; cursor:pointer;" onclick="closeAdmin()">
+      ← Back to website
+    </p>
+  </div>
+</div>
+
+<!-- ─── ADMIN MAIN (sidebar + content) ─── -->
+<div id="admin-main" style="display:none; height:100vh; background:#F5F5F5; overflow:hidden;">
+
+  <!-- Sidebar -->
+  <div id="admin-sidebar" style="
+    position:fixed; top:0; left:0; height:100%; width:240px;
+    background:#2B2B2B; display:flex; flex-direction:column;
+    z-index:10; transition:transform 0.3s ease;
+  ">
+    <div style="padding:20px 20px 16px; border-bottom:1px solid rgba(255,255,255,0.08);">
+      <img src="logo-transparent.png" alt="Alpha" style="height:44px; width:auto; filter:none;">
+      <p style="color:rgba(255,255,255,0.4); font-size:10px; margin:6px 0 0; letter-spacing:2px; text-transform:uppercase;">Admin Panel</p>
+    </div>
+    <nav style="flex:1; padding:12px 10px; overflow-y:auto;">
+      <p style="color:rgba(255,255,255,0.3); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:8px 10px 4px;">Main</p>
+      <button onclick="aNav('dashboard')"   class="anav-btn" id="anav-dashboard"><i class="ri-dashboard-line"></i> Dashboard</button>
+      <p style="color:rgba(255,255,255,0.3); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:12px 10px 4px;">Content</p>
+      <button onclick="aNav('services')"    class="anav-btn" id="anav-services"><i class="ri-tools-line"></i> Services</button>
+      <button onclick="aNav('gallery')"     class="anav-btn" id="anav-gallery"><i class="ri-image-line"></i> Gallery</button>
+      <p style="color:rgba(255,255,255,0.3); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:12px 10px 4px;">Inbox</p>
+      <button onclick="aNav('messages')"    class="anav-btn" id="anav-messages"><i class="ri-mail-line"></i> Messages <span id="unread-badge" style="display:none; background:#EF4444; color:#fff; font-size:10px; font-weight:700; padding:1px 6px; border-radius:20px; margin-left:4px;"></span></button>
+      <button onclick="aNav('quotes')"      class="anav-btn" id="anav-quotes"><i class="ri-file-list-3-line"></i> Quote Requests <span id="new-quote-badge" style="display:none; background:#3DA9F5; color:#fff; font-size:10px; font-weight:700; padding:1px 6px; border-radius:20px; margin-left:4px;"></span></button>
+      <p style="color:rgba(255,255,255,0.3); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:12px 10px 4px;">Settings</p>
+      <button onclick="aNav('content')"     class="anav-btn" id="anav-content"><i class="ri-edit-2-line"></i> Page Content</button>
+      <button onclick="aNav('settings')"    class="anav-btn" id="anav-settings"><i class="ri-settings-3-line"></i> Site Settings</button>
+    </nav>
+    <div style="padding:16px; border-top:1px solid rgba(255,255,255,0.08);">
+      <button onclick="closeAdmin()" style="width:100%; background:rgba(255,255,255,0.07); border:none; color:rgba(255,255,255,0.6); padding:10px; border-radius:8px; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; font-family:'Inter',sans-serif;">
+        <i class="ri-arrow-left-line"></i> Back to Website
+      </button>
+      <button onclick="adminLogout()" style="width:100%; background:transparent; border:none; color:rgba(255,255,255,0.35); padding:8px; border-radius:8px; font-size:11px; cursor:pointer; margin-top:4px; font-family:'Inter',sans-serif;">
+        <i class="ri-logout-line"></i> Sign Out
+      </button>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div style="margin-left:240px; height:100vh; overflow-y:auto; display:flex; flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="background:#fff; border-bottom:1px solid #E8E8E8; padding:0 28px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:5;">
+      <h1 id="admin-page-title" style="font-family:'Montserrat',sans-serif; font-size:17px; font-weight:800; color:#1A1A1A; margin:0;"></h1>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#3DA9F5,#2390d9); display:flex; align-items:center; justify-content:center;">
+          <i class="ri-user-line" style="color:#fff; font-size:14px;"></i>
+        </div>
+        <div>
+          <p style="margin:0; font-size:13px; font-weight:600; color:#1A1A1A;">Admin</p>
+          <p style="margin:0; font-size:11px; color:#6B7280;">admin@alphadrywall.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div id="admin-content" style="flex:1; padding:28px;"></div>
+  </div>
+</div>
+</div><!-- /admin-root -->
+
+
+<style>
+.anav-btn {
+  width:100%; text-align:left; background:transparent; border:none;
+  color:rgba(255,255,255,0.65); padding:9px 12px; border-radius:8px;
+  font-size:13px; cursor:pointer; display:flex; align-items:center;
+  gap:10px; font-family:'Inter',sans-serif; font-weight:500;
+  transition:background 0.15s, color 0.15s; margin-bottom:1px;
+}
+.anav-btn:hover { background:rgba(255,255,255,0.08); color:#fff; }
+.anav-btn.active { background:rgba(61,169,245,0.18); color:#3DA9F5; }
+.anav-btn i { font-size:15px; width:16px; flex-shrink:0; }
+
+.a-card {
+  background:#fff; border-radius:14px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  overflow:hidden;
+}
+.a-table { width:100%; border-collapse:collapse; font-size:13px; }
+.a-table th { background:#F9FAFB; padding:10px 16px; text-align:left; font-size:11px; font-weight:700; color:#6B7280; text-transform:uppercase; letter-spacing:0.8px; border-bottom:1px solid #F0F0F0; }
+.a-table td { padding:13px 16px; border-bottom:1px solid #F7F7F7; color:#374151; vertical-align:middle; }
+.a-table tr:last-child td { border-bottom:none; }
+.a-table tr:hover td { background:#FAFAFA; }
+
+.a-badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+.a-badge-blue   { background:#EFF8FF; color:#3DA9F5; }
+.a-badge-green  { background:#F0FDF4; color:#16A34A; }
+.a-badge-yellow { background:#FFFBEB; color:#D97706; }
+.a-badge-red    { background:#FEF2F2; color:#DC2626; }
+.a-badge-gray   { background:#F3F4F6; color:#6B7280; }
+
+.a-btn { border:none; padding:8px 16px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; transition:opacity 0.15s; }
+.a-btn:hover { opacity:0.85; }
+.a-btn-blue   { background:#3DA9F5; color:#fff; }
+.a-btn-red    { background:#FEF2F2; color:#DC2626; }
+.a-btn-gray   { background:#F3F4F6; color:#374151; }
+.a-btn-green  { background:#F0FDF4; color:#16A34A; }
+
+.a-input {
+  width:100%; padding:9px 13px; border:1.5px solid #E8E8E8; border-radius:8px;
+  font-size:13px; font-family:'Inter',sans-serif; outline:none; box-sizing:border-box;
+  transition:border-color 0.2s;
+}
+.a-input:focus { border-color:#3DA9F5; }
+
+.a-stat-card {
+  background:#fff; border-radius:14px; padding:22px 24px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  display:flex; align-items:center; gap:16px;
+}
+</style>
+
+<script>
+// ═══════════════ ADMIN DATA (localStorage) ═══════════════
+function aData(key, def) {
+  try { return JSON.parse(localStorage.getItem('alpha_' + key)) || def; }
+  catch(e) { return def; }
+}
+function aSave(key, val) {
+  localStorage.setItem('alpha_' + key, JSON.stringify(val));
+}
+
+// ═══════════════ DYNAMIC CONTENT ENGINE ═══════════════
+function applyDynamic() {
+  const s = aData('settings', {});
+  const c = aData('content', {});
+
+  // — Settings: Contact info wired to footer + contact page —
+  const phone = s.phone || '(555) 123-4567';
+  const email = s.email || 'info@alphadrywall.com';
+  const addr  = s.address || 'Toronto, ON, Canada';
+  const hours = s.hours  || 'Mon–Fri: 7:00am–6:00pm\nSat: 8:00am–4:00pm\nSun: Closed';
+  const ig = s.instagram || '#', fb = s.facebook || '#';
+  const li = s.linkedin  || '#', gg = s.google   || '#';
+
+  // Footer
+  const fp = document.getElementById('f-phone-link');
+  if (fp) { fp.href = 'tel:' + phone.replace(/\D/g,''); fp.textContent = phone; }
+  const fe = document.getElementById('f-email-link');
+  if (fe) { fe.href = 'mailto:' + email; fe.textContent = email; }
+  const fa = document.getElementById('f-addr');
+  if (fa) fa.textContent = addr;
+  ['f-ig','f-fb','f-li','f-gg'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (el) el.href = [ig,fb,li,gg][i] || '#';
+  });
+
+  // Contact page
+  const cp = document.getElementById('c-phone-link');
+  if (cp) { cp.href = 'tel:' + phone.replace(/\D/g,''); cp.textContent = phone; }
+  const ce = document.getElementById('c-email-link');
+  if (ce) { ce.href = 'mailto:' + email; ce.textContent = email; }
+  const ca = document.getElementById('c-addr');
+  if (ca) ca.textContent = addr;
+  const ch = document.getElementById('c-hours-content');
+  if (ch) ch.innerHTML = hours.split('\n').map(l => `<p class="text-muted text-sm">${l}</p>`).join('');
+  ['c-ig','c-fb','c-li','c-gg'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (el) el.href = [ig,fb,li,gg][i] || '#';
+  });
+
+  // — Content: Hero, Stats, CTA, About, SEO —
+  const hh = document.getElementById('hero-h1');
+  if (hh && c.heroHeadline) {
+    const lines = c.heroHeadline.split('\n');
+    hh.innerHTML = lines.map((l,i) => {
+      const safe = l.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+      return i === 1 ? `<span class="text-primary">${safe}</span>` : safe;
+    }).join('<br>');
+  }
+  const ht = document.getElementById('hero-tagline');
+  if (ht && c.heroTagline) ht.textContent = c.heroTagline;
+  const hs = document.getElementById('hero-sub');
+  if (hs && c.heroSub) hs.textContent = c.heroSub;
+  const hi = document.getElementById('hero-img');
+  if (hi && c.heroImg) hi.src = c.heroImg;
+
+  for (let i = 0; i < 4; i++) {
+    const sv = document.getElementById('stat'+i+'-val');
+    const sl = document.getElementById('stat'+i+'-lbl');
+    if (sv && c['stat'+i+'val']) sv.textContent = c['stat'+i+'val'];
+    if (sl && c['stat'+i+'lbl']) sl.textContent = c['stat'+i+'lbl'];
+  }
+
+  const ctH = document.getElementById('cta-h2');
+  if (ctH && c.ctaTitle) ctH.textContent = c.ctaTitle;
+  const ctP = document.getElementById('cta-sub');
+  if (ctP && c.ctaSub) ctP.textContent = c.ctaSub;
+
+  const ap1 = document.getElementById('about-p1');
+  if (ap1 && c.aboutP1) ap1.textContent = c.aboutP1;
+  const ap2 = document.getElementById('about-p2');
+  if (ap2 && c.aboutP2) {
+    const safe = c.aboutP2.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    ap2.innerHTML = safe.replace(/"([^"]+)"/g, '<em class="text-gold not-italic font-semibold">"$1"</em>');
+  }
+
+  if (c.seoTitle) document.title = c.seoTitle;
+  const md = document.querySelector('meta[name="description"]');
+  if (md && c.seoDesc) md.setAttribute('content', c.seoDesc);
+}
+
+// Seed demo data on first load
+(function seedDemo() {
+  if (aData('seeded', false)) return;
+  aSave('messages', [
+    { id:1, name:'Michael T.', email:'michael@email.com', phone:'(416) 555-1111', service:'Basement Renovation', message:'Hi, I need a quote for finishing my 1200sqft basement. Looking to start in May.', read:false, date:'2026-04-15' },
+    { id:2, name:'Sarah K.', email:'sarah@company.com', phone:'(647) 555-2222', service:'Framing', message:'We need commercial framing for our new office space in Mississauga — approximately 3000sqft.', read:false, date:'2026-04-16' },
+    { id:3, name:'James R.', email:'james@email.com', phone:'(905) 555-3333', service:'Drywall Installation', message:'Looking for drywall installation for a home addition — about 800sqft. Can you provide a free estimate?', read:true, date:'2026-04-14' },
+  ]);
+  aSave('quotes', [
+    { id:1, name:'Linda M.', email:'linda@email.com', phone:'(416) 555-4444', service:'Taping & Finishing', description:'Full taping and Level 5 finish for a new build — 2400sqft total.', contact:'email', startDate:'2026-05-01', status:'new', date:'2026-04-16' },
+    { id:2, name:'David C.', email:'david@email.com', phone:'(647) 555-5555', service:'Ceiling Work', description:'Custom coffered ceiling for master bedroom and living room.', contact:'phone', startDate:'2026-05-15', status:'reviewed', date:'2026-04-15' },
+    { id:3, name:'Priya N.', email:'priya@email.com', phone:'(905) 555-6666', service:'General Renovation', description:'Full home addition — 600sqft including framing, drywall, taping and paint.', contact:'email', startDate:'2026-06-01', status:'contacted', date:'2026-04-13' },
+  ]);
+  aSave('services', [
+    { id:1, title:'Drywall Installation', icon:'ri-layout-grid-line', desc:'Precision installation for new builds and renovations.', active:true },
+    { id:2, title:'Framing', icon:'ri-building-4-line', desc:'Steel & wood framing for partitions and commercial spaces.', active:true },
+    { id:3, title:'Taping & Mudding', icon:'ri-paint-brush-line', desc:'Seamless joint finishing for a flawless paint-ready surface.', active:true },
+    { id:4, title:'Sanding & Finishing', icon:'ri-scissors-cut-line', desc:'Level 5 sanding for the finest finish in the industry.', active:true },
+    { id:5, title:'Basement Renovation', icon:'ri-home-4-line', desc:'Transform unfinished basements into beautiful living spaces.', active:true },
+    { id:6, title:'Painting', icon:'ri-palette-line', desc:'Interior painting with premium materials.', active:true },
+    { id:7, title:'Ceiling Work', icon:'ri-tools-line', desc:'Custom ceiling systems — coffered, tray, and drop ceilings.', active:true },
+    { id:8, title:'General Renovation', icon:'ri-hammer-line', desc:'Full-scope renovation for residential and commercial properties.', active:true },
+  ]);
+  aSave('gallery', [
+    { id:1, title:'Curved Ceiling Framing', category:'Framing', file:'1743102911689.jpeg', desc:'Commercial project — Toronto, ON' },
+    { id:2, title:'Stairwell Drywall Finishing', category:'Drywall Installation', file:'WhatsApp Image 2026-04-17 at 20.41.28 (1).jpeg', desc:'Residential — North York, ON' },
+    { id:3, title:'Arched Doorway Corridor', category:'Drywall Installation', file:'WhatsApp Image 2026-04-17 at 20.41.28 (3).jpeg', desc:'Residential — Mississauga, ON' },
+    { id:4, title:'Panel Installation Prep', category:'Drywall Installation', file:'1743102917963.jpeg', desc:'Commercial — Toronto, ON' },
+    { id:5, title:'Custom Curved Drywall', category:'Taping & Mudding', file:'1743102914968.jpeg', desc:'Specialty Work — Toronto, ON' },
+    { id:6, title:'Corner Bead Detail', category:'Sanding & Finishing', file:'1743102912283.jpeg', desc:'Finishing — GTA' },
+  ]);
+  aSave('settings', {
+    phone: '(555) 123-4567',
+    email: 'info@alphadrywall.com',
+    address: 'Toronto, ON, Canada',
+    hours: 'Mon–Fri: 7:00am–6:00pm\nSat: 8:00am–4:00pm\nSun: Closed',
+    instagram: '#', facebook: '#', linkedin: '#', google: '#'
+  });
+  aSave('content', {
+    heroHeadline: 'Professional Drywall\n& Renovation\nServices',
+    heroTagline: '"In Search for Excellence"',
+    heroSub: 'Quality craftsmanship for residential & commercial projects across the Greater Toronto Area.',
+    heroImg: '1743102911689.jpeg',
+    stat0val: '10+',  stat0lbl: 'Years Experience',
+    stat1val: '500+', stat1lbl: 'Projects Done',
+    stat2val: '300+', stat2lbl: 'Happy Clients',
+    stat3val: '100%', stat3lbl: 'Satisfaction Rate',
+    aboutP1: 'Alpha Drywall and Renovation has been proudly serving Toronto and the Greater Toronto Area with an unwavering commitment to quality craftsmanship. We specialize in drywall, framing, finishing, and full-scale renovations for residential and commercial clients.',
+    aboutP2: 'Every project reflects our guiding principle — "In Search for Excellence." We don\'t just meet expectations — we exceed them.',
+    ctaTitle: 'Ready to Start Your Project?',
+    ctaSub: 'Get a free, no-obligation estimate. Serving Toronto & the Greater Toronto Area.',
+    seoTitle: 'Alpha Drywall and Renovation | In Search for Excellence',
+    seoDesc: 'Professional drywall installation, framing, renovation services in Toronto & GTA. Licensed, insured, and committed to excellence.',
+  });
+  aSave('seeded', true);
+})();
+
+// ═══════════════ AUTH ═══════════════
+function openAdmin() {
+  document.getElementById('admin-root').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  if (sessionStorage.getItem('alpha_admin_logged_in')) {
+    showAdminMain();
+  } else {
+    document.getElementById('admin-login').style.display = 'flex';
+    document.getElementById('admin-main').style.display = 'none';
+  }
+}
+function closeAdmin() {
+  document.getElementById('admin-root').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function adminLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  const correctPass = aData('admin_pass', 'admin123');
+  if (email === 'admin@alphadrywall.com' && pass === correctPass) {
+    sessionStorage.setItem('alpha_admin_logged_in', '1');
+    document.getElementById('login-error').style.display = 'none';
+    showAdminMain();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function adminLogout() {
+  sessionStorage.removeItem('alpha_admin_logged_in');
+  document.getElementById('admin-main').style.display = 'none';
+  document.getElementById('admin-login').style.display = 'flex';
+}
+function showAdminMain() {
+  document.getElementById('admin-login').style.display = 'none';
+  document.getElementById('admin-main').style.display = 'flex';
+  aNav('dashboard');
+}
+
+// ═══════════════ NAV ═══════════════
+let currentAdmin = '';
+function aNav(page) {
+  currentAdmin = page;
+  document.querySelectorAll('.anav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('anav-' + page);
+  if (btn) btn.classList.add('active');
+  const titles = { dashboard:'Dashboard', services:'Services', gallery:'Gallery', messages:'Messages', quotes:'Quote Requests', content:'Page Content', settings:'Site Settings' };
+  document.getElementById('admin-page-title').textContent = titles[page] || page;
+  const renders = { dashboard: renderDashboard, services: renderServices, gallery: renderGallery, messages: renderMessages, quotes: renderQuotes, content: renderContent, settings: renderSettings };
+  if (renders[page]) renders[page]();
+  updateBadges();
+}
+
+function updateBadges() {
+  const msgs = aData('messages', []);
+  const unread = msgs.filter(m => !m.read).length;
+  const ub = document.getElementById('unread-badge');
+  ub.style.display = unread > 0 ? 'inline-block' : 'none';
+  ub.textContent = unread;
+
+  const quotes = aData('quotes', []);
+  const newQ = quotes.filter(q => q.status === 'new').length;
+  const qb = document.getElementById('new-quote-badge');
+  qb.style.display = newQ > 0 ? 'inline-block' : 'none';
+  qb.textContent = newQ;
+}
+
+// ═══════════════ DASHBOARD ═══════════════
+function renderDashboard() {
+  const msgs    = aData('messages', []);
+  const quotes  = aData('quotes', []);
+  const svcs    = aData('services', []);
+  const gallery = aData('gallery', []);
+  const unread  = msgs.filter(m => !m.read).length;
+  const newQ    = quotes.filter(q => q.status === 'new').length;
+
+  document.getElementById('admin-content').innerHTML = `
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:28px;">
+      <div class="a-stat-card">
+        <div style="width:48px;height:48px;border-radius:12px;background:#EFF8FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ri-mail-line" style="color:#3DA9F5;font-size:22px;"></i>
+        </div>
+        <div>
+          <p style="margin:0;font-size:26px;font-weight:800;font-family:'Montserrat',sans-serif;color:#1A1A1A;">${msgs.length}</p>
+          <p style="margin:0;font-size:12px;color:#6B7280;">Total Messages</p>
+          ${unread > 0 ? `<p style="margin:2px 0 0;font-size:11px;color:#EF4444;font-weight:600;">${unread} unread</p>` : ''}
+        </div>
+      </div>
+      <div class="a-stat-card">
+        <div style="width:48px;height:48px;border-radius:12px;background:#FFF7ED;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ri-file-list-3-line" style="color:#F59E0B;font-size:22px;"></i>
+        </div>
+        <div>
+          <p style="margin:0;font-size:26px;font-weight:800;font-family:'Montserrat',sans-serif;color:#1A1A1A;">${quotes.length}</p>
+          <p style="margin:0;font-size:12px;color:#6B7280;">Quote Requests</p>
+          ${newQ > 0 ? `<p style="margin:2px 0 0;font-size:11px;color:#3DA9F5;font-weight:600;">${newQ} new</p>` : ''}
+        </div>
+      </div>
+      <div class="a-stat-card">
+        <div style="width:48px;height:48px;border-radius:12px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ri-tools-line" style="color:#16A34A;font-size:22px;"></i>
+        </div>
+        <div>
+          <p style="margin:0;font-size:26px;font-weight:800;font-family:'Montserrat',sans-serif;color:#1A1A1A;">${svcs.filter(s=>s.active).length}</p>
+          <p style="margin:0;font-size:12px;color:#6B7280;">Active Services</p>
+        </div>
+      </div>
+      <div class="a-stat-card">
+        <div style="width:48px;height:48px;border-radius:12px;background:#FDF4FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="ri-image-line" style="color:#9333EA;font-size:22px;"></i>
+        </div>
+        <div>
+          <p style="margin:0;font-size:26px;font-weight:800;font-family:'Montserrat',sans-serif;color:#1A1A1A;">${gallery.length}</p>
+          <p style="margin:0;font-size:12px;color:#6B7280;">Gallery Items</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="a-card">
+        <div style="padding:18px 20px; border-bottom:1px solid #F0F0F0; display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="margin:0;font-size:14px;font-weight:700;font-family:'Montserrat',sans-serif;">Recent Messages</h3>
+          <button class="a-btn a-btn-blue" onclick="aNav('messages')" style="padding:5px 12px;font-size:11px;">View All</button>
+        </div>
+        <div>
+          ${msgs.slice(0,3).map(m => `
+            <div style="padding:13px 20px; border-bottom:1px solid #F7F7F7; display:flex; align-items:center; gap:12px;" onclick="aNav('messages')" style="cursor:pointer;">
+              <div style="width:8px;height:8px;border-radius:50%;background:${m.read ? '#E5E7EB' : '#EF4444'};flex-shrink:0;"></div>
+              <div style="flex:1; min-width:0;">
+                <p style="margin:0;font-size:13px;font-weight:600;color:#1A1A1A;">${m.name}</p>
+                <p style="margin:2px 0 0;font-size:11px;color:#6B7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${m.message}</p>
+              </div>
+              <p style="margin:0;font-size:11px;color:#9CA3AF;flex-shrink:0;">${m.date}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="a-card">
+        <div style="padding:18px 20px; border-bottom:1px solid #F0F0F0; display:flex; justify-content:space-between; align-items:center;">
+          <h3 style="margin:0;font-size:14px;font-weight:700;font-family:'Montserrat',sans-serif;">Recent Quote Requests</h3>
+          <button class="a-btn a-btn-blue" onclick="aNav('quotes')" style="padding:5px 12px;font-size:11px;">View All</button>
+        </div>
+        <div>
+          ${quotes.slice(0,3).map(q => `
+            <div style="padding:13px 20px; border-bottom:1px solid #F7F7F7; display:flex; align-items:center; gap:12px;">
+              <div style="flex:1; min-width:0;">
+                <p style="margin:0;font-size:13px;font-weight:600;color:#1A1A1A;">${q.name}</p>
+                <p style="margin:2px 0 0;font-size:11px;color:#6B7280;">${q.service}</p>
+              </div>
+              <span class="a-badge ${q.status==='new'?'a-badge-blue':q.status==='reviewed'?'a-badge-yellow':q.status==='contacted'?'a-badge-green':'a-badge-gray'}">${q.status}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ═══════════════ SERVICES ═══════════════
+function renderServices() {
+  const svcs = aData('services', []);
+  document.getElementById('admin-content').innerHTML = `
+    <div class="a-card">
+      <div style="padding:18px 20px; border-bottom:1px solid #F0F0F0; display:flex; justify-content:space-between; align-items:center;">
+        <p style="margin:0;font-size:13px;color:#6B7280;">${svcs.length} services total</p>
+        <button class="a-btn a-btn-blue" onclick="openServiceModal()"><i class="ri-add-line"></i> Add Service</button>
+      </div>
+      <table class="a-table">
+        <thead><tr>
+          <th>Service</th><th>Description</th><th>Status</th><th>Actions</th>
+        </tr></thead>
+        <tbody>
+          ${svcs.map(s => `
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:34px;height:34px;border-radius:8px;background:#EFF8FF;display:flex;align-items:center;justify-content:center;">
+                  <i class="${s.icon}" style="color:#3DA9F5;"></i>
+                </div>
+                <span style="font-weight:600;">${s.title}</span>
+              </div></td>
+              <td style="color:#6B7280;max-width:240px;">${s.desc}</td>
+              <td>
+                <span class="a-badge ${s.active ? 'a-badge-green' : 'a-badge-gray'}">${s.active ? 'Active' : 'Inactive'}</span>
+              </td>
+              <td>
+                <div style="display:flex;gap:6px;">
+                  <button class="a-btn a-btn-gray" onclick="toggleService(${s.id})">${s.active ? 'Deactivate' : 'Activate'}</button>
+                  <button class="a-btn a-btn-red" onclick="deleteService(${s.id})"><i class="ri-delete-bin-line"></i></button>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add Service Modal -->
+    <div id="service-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;align-items:center;justify-content:center;">
+      <div style="background:#fff;border-radius:16px;padding:28px;width:460px;max-width:95vw;box-shadow:0 25px 60px rgba(0,0,0,0.2);">
+        <h3 style="margin:0 0 20px;font-family:'Montserrat',sans-serif;">Add New Service</h3>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Service Title</label>
+          <input id="svc-title" class="a-input" placeholder="e.g. Drywall Repair">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Short Description</label>
+          <textarea id="svc-desc" class="a-input" style="height:80px;resize:none;" placeholder="Brief description of the service..."></textarea>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button class="a-btn a-btn-gray" onclick="closeServiceModal()">Cancel</button>
+          <button class="a-btn a-btn-blue" onclick="saveService()">Add Service</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function openServiceModal() {
+  document.getElementById('service-modal').style.display = 'flex';
+}
+function closeServiceModal() {
+  document.getElementById('service-modal').style.display = 'none';
+}
+function saveService() {
+  const title = document.getElementById('svc-title').value.trim();
+  const desc  = document.getElementById('svc-desc').value.trim();
+  if (!title) return;
+  const svcs = aData('services', []);
+  svcs.push({ id: Date.now(), title, icon:'ri-hammer-line', desc, active:true });
+  aSave('services', svcs);
+  closeServiceModal();
+  renderServices();
+  adminToast('Service added successfully!');
+}
+function toggleService(id) {
+  const svcs = aData('services', []);
+  const s = svcs.find(x => x.id === id);
+  if (s) s.active = !s.active;
+  aSave('services', svcs);
+  renderServices();
+}
+function deleteService(id) {
+  if (!confirm('Delete this service?')) return;
+  aSave('services', aData('services', []).filter(s => s.id !== id));
+  renderServices();
+  adminToast('Service deleted.');
+}
+
+// ═══════════════ GALLERY ═══════════════
+function renderGallery() {
+  const items = aData('gallery', []);
+  document.getElementById('admin-content').innerHTML = `
+    <div class="a-card" style="margin-bottom:16px;">
+      <div style="padding:18px 20px; border-bottom:1px solid #F0F0F0;">
+        <p style="margin:0;font-size:13px;color:#6B7280;">${items.length} items in gallery</p>
+      </div>
+      <div style="padding:20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px;">
+        ${items.map(g => `
+          <div style="border-radius:12px;overflow:hidden;border:1px solid #F0F0F0;background:#F9FAFB;">
+            <div style="height:120px;overflow:hidden;">
+              <img src="${g.file}" alt="${g.title}" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div style="padding:10px 12px;">
+              <p style="margin:0;font-size:12px;font-weight:700;color:#1A1A1A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${g.title}</p>
+              <p style="margin:2px 0 6px;font-size:11px;color:#6B7280;">${g.category}</p>
+              <button class="a-btn a-btn-red" onclick="deleteGallery(${g.id})" style="width:100%;justify-content:center;display:flex;align-items:center;gap:4px;"><i class="ri-delete-bin-line"></i> Remove</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="a-card">
+      <div style="padding:20px;">
+        <h3 style="margin:0 0 16px;font-family:'Montserrat',sans-serif;font-size:14px;">Add to Gallery</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Title</label>
+            <input id="gal-title" class="a-input" placeholder="Project title">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Category</label>
+            <select id="gal-cat" class="a-input">
+              <option>Drywall Installation</option><option>Framing</option>
+              <option>Taping & Mudding</option><option>Sanding & Finishing</option>
+              <option>Basement Renovation</option><option>Ceiling Work</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Description</label>
+          <input id="gal-desc" class="a-input" placeholder="e.g. Residential — Toronto, ON">
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Image File (from site folder)</label>
+          <input id="gal-file" class="a-input" placeholder="filename.jpg">
+        </div>
+        <button class="a-btn a-btn-blue" onclick="addGallery()"><i class="ri-add-line"></i> Add to Gallery</button>
+      </div>
+    </div>
+  `;
+}
+function deleteGallery(id) {
+  if (!confirm('Remove this item from gallery?')) return;
+  aSave('gallery', aData('gallery', []).filter(g => g.id !== id));
+  renderGallery();
+  adminToast('Gallery item removed.');
+}
+function addGallery() {
+  const title = document.getElementById('gal-title').value.trim();
+  const cat   = document.getElementById('gal-cat').value;
+  const desc  = document.getElementById('gal-desc').value.trim();
+  const file  = document.getElementById('gal-file').value.trim();
+  if (!title || !file) { alert('Title and filename are required.'); return; }
+  const items = aData('gallery', []);
+  items.push({ id: Date.now(), title, category: cat, file, desc });
+  aSave('gallery', items);
+  renderGallery();
+  adminToast('Added to gallery!');
+}
+
+// ═══════════════ MESSAGES ═══════════════
+let viewingMsg = null;
+function renderMessages() {
+  const msgs = aData('messages', []);
+  document.getElementById('admin-content').innerHTML = `
+    <div class="a-card">
+      <div style="padding:18px 20px; border-bottom:1px solid #F0F0F0; display:flex; justify-content:space-between; align-items:center;">
+        <p style="margin:0;font-size:13px;color:#6B7280;">${msgs.length} messages · ${msgs.filter(m=>!m.read).length} unread</p>
+        <button class="a-btn a-btn-gray" onclick="markAllRead()">Mark All Read</button>
+      </div>
+      <table class="a-table">
+        <thead><tr><th></th><th>Name</th><th>Service</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${msgs.map(m => `
+            <tr style="${!m.read ? 'background:#FAFEFF;' : ''}">
+              <td style="width:10px;padding-left:16px;"><div style="width:8px;height:8px;border-radius:50%;background:${m.read?'#E5E7EB':'#EF4444'};"></div></td>
+              <td><div style="font-weight:${m.read?'400':'700'};color:#1A1A1A;">${m.name}</div><div style="font-size:11px;color:#6B7280;">${m.email}</div></td>
+              <td><span class="a-badge a-badge-blue">${m.service || '—'}</span></td>
+              <td style="color:#6B7280;font-size:12px;">${m.date}</td>
+              <td><span class="a-badge ${m.read?'a-badge-gray':'a-badge-red'}">${m.read?'Read':'Unread'}</span></td>
+              <td><div style="display:flex;gap:6px;">
+                <button class="a-btn a-btn-blue" onclick="viewMessage(${m.id})">View</button>
+                <button class="a-btn a-btn-red" onclick="deleteMessage(${m.id})"><i class="ri-delete-bin-line"></i></button>
+              </div></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Message detail modal -->
+    <div id="msg-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+      <div id="msg-modal-body" style="background:#fff;border-radius:16px;padding:32px;width:520px;max-width:95vw;box-shadow:0 25px 60px rgba(0,0,0,0.2);"></div>
+    </div>
+  `;
+}
+function viewMessage(id) {
+  const msgs = aData('messages', []);
+  const m = msgs.find(x => x.id === id);
+  if (!m) return;
+  m.read = true;
+  aSave('messages', msgs);
+  updateBadges();
+  document.getElementById('msg-modal-body').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:20px;">
+      <div>
+        <h3 style="margin:0 0 4px;font-family:'Montserrat',sans-serif;">${m.name}</h3>
+        <p style="margin:0;font-size:12px;color:#6B7280;">${m.email} · ${m.phone || '—'} · ${m.date}</p>
+      </div>
+      <button onclick="closeMsgModal()" style="background:#F3F4F6;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;">×</button>
+    </div>
+    <div style="background:#F9FAFB;border-radius:10px;padding:16px;margin-bottom:20px;">
+      <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Service Interested In</p>
+      <span class="a-badge a-badge-blue">${m.service || '—'}</span>
+    </div>
+    <div style="background:#F9FAFB;border-radius:10px;padding:16px;margin-bottom:24px;">
+      <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Message</p>
+      <p style="margin:0;color:#374151;line-height:1.6;">${m.message}</p>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <a href="mailto:${m.email}" class="a-btn a-btn-blue" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><i class="ri-mail-send-line"></i> Reply by Email</a>
+      <button class="a-btn a-btn-gray" onclick="closeMsgModal()">Close</button>
+    </div>
+  `;
+  document.getElementById('msg-modal').style.display = 'flex';
+  renderMessages();
+}
+function closeMsgModal() {
+  document.getElementById('msg-modal').style.display = 'none';
+}
+function deleteMessage(id) {
+  if (!confirm('Delete this message?')) return;
+  aSave('messages', aData('messages', []).filter(m => m.id !== id));
+  renderMessages();
+  updateBadges();
+  adminToast('Message deleted.');
+}
+function markAllRead() {
+  const msgs = aData('messages', []);
+  msgs.forEach(m => m.read = true);
+  aSave('messages', msgs);
+  renderMessages();
+  updateBadges();
+}
+
+// ═══════════════ QUOTES ═══════════════
+function renderQuotes() {
+  const quotes = aData('quotes', []);
+  document.getElementById('admin-content').innerHTML = `
+    <div class="a-card">
+      <div style="padding:18px 20px; border-bottom:1px solid #F0F0F0;">
+        <p style="margin:0;font-size:13px;color:#6B7280;">${quotes.length} quote requests</p>
+      </div>
+      <table class="a-table">
+        <thead><tr><th>Client</th><th>Service</th><th>Start Date</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${quotes.map(q => `
+            <tr>
+              <td><div style="font-weight:600;color:#1A1A1A;">${q.name}</div><div style="font-size:11px;color:#6B7280;">${q.email}</div></td>
+              <td>${q.service}</td>
+              <td style="font-size:12px;color:#6B7280;">${q.startDate || '—'}</td>
+              <td style="font-size:12px;color:#6B7280;">${q.date}</td>
+              <td>
+                <select onchange="updateQuoteStatus(${q.id}, this.value)" class="a-input" style="width:auto;padding:4px 8px;font-size:11px;">
+                  <option value="new"       ${q.status==='new'?'selected':''}>New</option>
+                  <option value="reviewed"  ${q.status==='reviewed'?'selected':''}>Reviewed</option>
+                  <option value="contacted" ${q.status==='contacted'?'selected':''}>Contacted</option>
+                  <option value="completed" ${q.status==='completed'?'selected':''}>Completed</option>
+                </select>
+              </td>
+              <td><div style="display:flex;gap:6px;">
+                <button class="a-btn a-btn-blue" onclick="viewQuote(${q.id})">View</button>
+                <button class="a-btn a-btn-red" onclick="deleteQuote(${q.id})"><i class="ri-delete-bin-line"></i></button>
+              </div></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Quote detail modal -->
+    <div id="quote-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+      <div id="quote-modal-body" style="background:#fff;border-radius:16px;padding:32px;width:540px;max-width:95vw;box-shadow:0 25px 60px rgba(0,0,0,0.2);"></div>
+    </div>
+  `;
+}
+function updateQuoteStatus(id, status) {
+  const quotes = aData('quotes', []);
+  const q = quotes.find(x => x.id === id);
+  if (q) q.status = status;
+  aSave('quotes', quotes);
+  updateBadges();
+  adminToast('Status updated.');
+}
+function viewQuote(id) {
+  const q = aData('quotes', []).find(x => x.id === id);
+  if (!q) return;
+  document.getElementById('quote-modal-body').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:20px;">
+      <div>
+        <h3 style="margin:0 0 4px;font-family:'Montserrat',sans-serif;">${q.name}</h3>
+        <p style="margin:0;font-size:12px;color:#6B7280;">${q.email} · ${q.phone || '—'}</p>
+      </div>
+      <button onclick="closeQuoteModal()" style="background:#F3F4F6;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;">×</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div style="background:#F9FAFB;border-radius:10px;padding:14px;">
+        <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Service</p>
+        <p style="margin:0;font-size:13px;font-weight:600;color:#1A1A1A;">${q.service}</p>
+      </div>
+      <div style="background:#F9FAFB;border-radius:10px;padding:14px;">
+        <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Preferred Start</p>
+        <p style="margin:0;font-size:13px;font-weight:600;color:#1A1A1A;">${q.startDate || 'Not specified'}</p>
+      </div>
+      <div style="background:#F9FAFB;border-radius:10px;padding:14px;">
+        <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Contact Via</p>
+        <p style="margin:0;font-size:13px;font-weight:600;color:#1A1A1A;">${q.contact || '—'}</p>
+      </div>
+      <div style="background:#F9FAFB;border-radius:10px;padding:14px;">
+        <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Submitted</p>
+        <p style="margin:0;font-size:13px;font-weight:600;color:#1A1A1A;">${q.date}</p>
+      </div>
+    </div>
+    <div style="background:#F9FAFB;border-radius:10px;padding:16px;margin-bottom:24px;">
+      <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:1px;">Project Description</p>
+      <p style="margin:0;color:#374151;line-height:1.6;">${q.description}</p>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <a href="mailto:${q.email}" class="a-btn a-btn-blue" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;"><i class="ri-mail-send-line"></i> Reply</a>
+      <button class="a-btn a-btn-gray" onclick="closeQuoteModal()">Close</button>
+    </div>
+  `;
+  document.getElementById('quote-modal').style.display = 'flex';
+}
+function closeQuoteModal() {
+  document.getElementById('quote-modal').style.display = 'none';
+}
+function deleteQuote(id) {
+  if (!confirm('Delete this quote request?')) return;
+  aSave('quotes', aData('quotes', []).filter(q => q.id !== id));
+  renderQuotes();
+  updateBadges();
+  adminToast('Quote request deleted.');
+}
+
+// ═══════════════ CONTENT EDITOR ═══════════════
+function renderContent() {
+  const c = aData('content', {});
+  const inp = (id, val, placeholder, type='text') =>
+    `<input id="${id}" type="${type}" class="a-input" value="${(val||'').replace(/"/g,'&quot;')}" placeholder="${placeholder}">`;
+  const ta = (id, val, placeholder, h=80) =>
+    `<textarea id="${id}" class="a-input" style="height:${h}px;resize:vertical;">${val||''}</textarea>`;
+  const lbl = (text) =>
+    `<label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">${text}</label>`;
+
+  document.getElementById('admin-content').innerHTML = `
+  <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+    ${['hero','stats','about','cta','seo'].map(t =>
+      `<button onclick="cTab('${t}')" id="ctab-${t}" class="a-btn" style="border-radius:8px;font-size:12px;">${
+        {hero:'Hero Section',stats:'Stats',about:'About Text',cta:'CTA Banner',seo:'SEO / Meta'}[t]
+      }</button>`
+    ).join('')}
+  </div>
+
+  <!-- Hero -->
+  <div id="cpanel-hero" class="a-card" style="padding:20px;display:flex;flex-direction:column;gap:14px;">
+    <h3 style="margin:0 0 4px;font-size:14px;font-weight:800;font-family:Montserrat,sans-serif;"><i class="ri-image-line" style="color:#3DA9F5;margin-right:8px;"></i>Hero Section</h3>
+    <div>${lbl('Headline (one line per row, 2nd line shown in blue)')}${ta('c-heroHeadline', c.heroHeadline, 'Professional Drywall\n& Renovation\nServices', 70)}</div>
+    <div>${lbl('Tagline / Motto')}${inp('c-heroTagline', c.heroTagline, '"In Search for Excellence"')}</div>
+    <div>${lbl('Sub-text')}${ta('c-heroSub', c.heroSub, 'Quality craftsmanship...', 60)}</div>
+    <div>${lbl('Hero Background Image (filename or URL)')}${inp('c-heroImg', c.heroImg, '1743102911689.jpeg')}</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="a-btn a-btn-blue" onclick="saveContent()"><i class="ri-save-line"></i> Save</button>
+      <span id="c-preview-note" style="font-size:11px;color:#6B7280;">Changes apply live to the site</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div id="cpanel-stats" class="a-card" style="display:none;padding:20px;">
+    <h3 style="margin:0 0 16px;font-size:14px;font-weight:800;font-family:Montserrat,sans-serif;"><i class="ri-bar-chart-line" style="color:#3DA9F5;margin-right:8px;"></i>Stats (Homepage Numbers)</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      ${[0,1,2,3].map(i => `
+        <div style="background:#F9FAFB;padding:14px;border-radius:10px;">
+          <div style="margin-bottom:8px;">${lbl('Stat ' + (i+1) + ' — Value')}${inp('c-stat'+i+'val', c['stat'+i+'val'], '10+')}</div>
+          <div>${lbl('Label')}${inp('c-stat'+i+'lbl', c['stat'+i+'lbl'], 'Years Experience')}</div>
+        </div>
+      `).join('')}
+    </div>
+    <button class="a-btn a-btn-blue" onclick="saveContent()" style="margin-top:16px;"><i class="ri-save-line"></i> Save</button>
+  </div>
+
+  <!-- About -->
+  <div id="cpanel-about" class="a-card" style="display:none;padding:20px;flex-direction:column;gap:14px;">
+    <h3 style="margin:0 0 4px;font-size:14px;font-weight:800;font-family:Montserrat,sans-serif;"><i class="ri-file-text-line" style="color:#3DA9F5;margin-right:8px;"></i>About Text (Homepage)</h3>
+    <div>${lbl('First Paragraph')}${ta('c-aboutP1', c.aboutP1, 'Alpha Drywall and Renovation...', 100)}</div>
+    <div>${lbl('Second Paragraph (wrap text in "quotes" for gold highlight)')}${ta('c-aboutP2', c.aboutP2, 'Every project reflects...', 80)}</div>
+    <button class="a-btn a-btn-blue" onclick="saveContent()" style="align-self:flex-start;"><i class="ri-save-line"></i> Save</button>
+  </div>
+
+  <!-- CTA -->
+  <div id="cpanel-cta" class="a-card" style="display:none;padding:20px;flex-direction:column;gap:14px;">
+    <h3 style="margin:0 0 4px;font-size:14px;font-weight:800;font-family:Montserrat,sans-serif;"><i class="ri-megaphone-line" style="color:#3DA9F5;margin-right:8px;"></i>CTA Banner</h3>
+    <div>${lbl('Heading')}${inp('c-ctaTitle', c.ctaTitle, 'Ready to Start Your Project?')}</div>
+    <div>${lbl('Sub-text')}${inp('c-ctaSub', c.ctaSub, 'Get a free, no-obligation estimate...')}</div>
+    <button class="a-btn a-btn-blue" onclick="saveContent()" style="align-self:flex-start;"><i class="ri-save-line"></i> Save</button>
+  </div>
+
+  <!-- SEO -->
+  <div id="cpanel-seo" class="a-card" style="display:none;padding:20px;display:flex;flex-direction:column;gap:14px;">
+    <h3 style="margin:0 0 4px;font-size:14px;font-weight:800;font-family:Montserrat,sans-serif;"><i class="ri-search-line" style="color:#3DA9F5;margin-right:8px;"></i>SEO / Meta Tags</h3>
+    <div>${lbl('Page Title (browser tab)')}${inp('c-seoTitle', c.seoTitle, 'Alpha Drywall and Renovation | ...')}</div>
+    <div>${lbl('Meta Description (search engines)')}${ta('c-seoDesc', c.seoDesc, 'Professional drywall...', 80)}</div>
+    <button class="a-btn a-btn-blue" onclick="saveContent()" style="align-self:flex-start;"><i class="ri-save-line"></i> Save</button>
+  </div>
+  `;
+  cTab('hero');
+}
+
+function cTab(name) {
+  const blockPanels = ['stats'];
+  ['hero','stats','about','cta','seo'].forEach(t => {
+    const panel = document.getElementById('cpanel-' + t);
+    const btn   = document.getElementById('ctab-'   + t);
+    if (panel) panel.style.display = t === name ? (blockPanels.includes(t) ? 'block' : 'flex') : 'none';
+    if (btn) {
+      btn.style.background = t === name ? '#3DA9F5' : '#F3F4F6';
+      btn.style.color      = t === name ? '#fff'    : '#374151';
+    }
+  });
+}
+
+function saveContent() {
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  aSave('content', {
+    heroHeadline: g('c-heroHeadline'),
+    heroTagline:  g('c-heroTagline'),
+    heroSub:      g('c-heroSub'),
+    heroImg:      g('c-heroImg'),
+    stat0val: g('c-stat0val'), stat0lbl: g('c-stat0lbl'),
+    stat1val: g('c-stat1val'), stat1lbl: g('c-stat1lbl'),
+    stat2val: g('c-stat2val'), stat2lbl: g('c-stat2lbl'),
+    stat3val: g('c-stat3val'), stat3lbl: g('c-stat3lbl'),
+    aboutP1:  g('c-aboutP1'),
+    aboutP2:  g('c-aboutP2'),
+    ctaTitle: g('c-ctaTitle'),
+    ctaSub:   g('c-ctaSub'),
+    seoTitle: g('c-seoTitle'),
+    seoDesc:  g('c-seoDesc'),
+  });
+  applyDynamic();
+  adminToast('Content saved & applied live!');
+}
+
+// ═══════════════ SETTINGS ═══════════════
+function renderSettings() {
+  const s = aData('settings', {});
+  document.getElementById('admin-content').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <div class="a-card">
+        <div style="padding:18px 20px;border-bottom:1px solid #F0F0F0;">
+          <h3 style="margin:0;font-size:14px;font-weight:700;font-family:'Montserrat',sans-serif;"><i class="ri-contacts-line" style="color:#3DA9F5;margin-right:8px;"></i>Contact Information</h3>
+        </div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Phone Number</label>
+            <input id="s-phone" class="a-input" value="${s.phone || ''}" placeholder="(416) 555-0000">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Email Address</label>
+            <input id="s-email" class="a-input" value="${s.email || ''}" placeholder="info@alphadrywall.com">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Address</label>
+            <input id="s-address" class="a-input" value="${s.address || ''}" placeholder="Toronto, ON, Canada">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Business Hours</label>
+            <textarea id="s-hours" class="a-input" style="height:90px;resize:none;">${s.hours || ''}</textarea>
+          </div>
+          <button class="a-btn a-btn-blue" onclick="saveSettings()" style="align-self:flex-start;"><i class="ri-save-line"></i> Save Changes</button>
+        </div>
+      </div>
+
+      <div class="a-card">
+        <div style="padding:18px 20px;border-bottom:1px solid #F0F0F0;">
+          <h3 style="margin:0;font-size:14px;font-weight:700;font-family:'Montserrat',sans-serif;"><i class="ri-share-line" style="color:#3DA9F5;margin-right:8px;"></i>Social Media Links</h3>
+        </div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;"><i class="ri-instagram-line"></i> Instagram URL</label>
+            <input id="s-instagram" class="a-input" value="${s.instagram || ''}" placeholder="https://instagram.com/...">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;"><i class="ri-facebook-line"></i> Facebook URL</label>
+            <input id="s-facebook" class="a-input" value="${s.facebook || ''}" placeholder="https://facebook.com/...">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;"><i class="ri-linkedin-line"></i> LinkedIn URL</label>
+            <input id="s-linkedin" class="a-input" value="${s.linkedin || ''}" placeholder="https://linkedin.com/...">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;"><i class="ri-google-line"></i> Google Business URL</label>
+            <input id="s-google" class="a-input" value="${s.google || ''}" placeholder="https://g.page/...">
+          </div>
+          <button class="a-btn a-btn-blue" onclick="saveSettings()" style="align-self:flex-start;"><i class="ri-save-line"></i> Save Changes</button>
+        </div>
+      </div>
+
+      <div class="a-card" style="grid-column:1/-1;">
+        <div style="padding:18px 20px;border-bottom:1px solid #F0F0F0;">
+          <h3 style="margin:0;font-size:14px;font-weight:700;font-family:'Montserrat',sans-serif;"><i class="ri-lock-password-line" style="color:#3DA9F5;margin-right:8px;"></i>Change Admin Password</h3>
+        </div>
+        <div style="padding:20px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div style="flex:1;min-width:180px;">
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">New Password</label>
+            <input id="s-newpass" type="password" class="a-input" placeholder="••••••••">
+          </div>
+          <div style="flex:1;min-width:180px;">
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Confirm Password</label>
+            <input id="s-confirmpass" type="password" class="a-input" placeholder="••••••••">
+          </div>
+          <button class="a-btn a-btn-blue" onclick="changePassword()" style="white-space:nowrap;height:38px;">Update Password</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function saveSettings() {
+  aSave('settings', {
+    phone: document.getElementById('s-phone').value.trim(),
+    email: document.getElementById('s-email').value.trim(),
+    address: document.getElementById('s-address').value.trim(),
+    hours: document.getElementById('s-hours').value.trim(),
+    instagram: document.getElementById('s-instagram').value.trim(),
+    facebook: document.getElementById('s-facebook').value.trim(),
+    linkedin: document.getElementById('s-linkedin').value.trim(),
+    google: document.getElementById('s-google').value.trim(),
+  });
+  applyDynamic();
+  adminToast('Settings saved & applied live!');
+}
+function changePassword() {
+  const np = document.getElementById('s-newpass').value;
+  const cp = document.getElementById('s-confirmpass').value;
+  if (!np) { alert('Please enter a new password.'); return; }
+  if (np !== cp) { alert('Passwords do not match.'); return; }
+  if (np.length < 6) { alert('Password must be at least 6 characters.'); return; }
+  aSave('admin_pass', np);
+  document.getElementById('s-newpass').value = '';
+  document.getElementById('s-confirmpass').value = '';
+  adminToast('Password updated!');
+}
+
+// ═══════════════ TOAST ═══════════════
+function adminToast(msg) {
+  let t = document.getElementById('admin-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'admin-toast';
+    t.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;background:#16A34A;color:#fff;padding:13px 20px;border-radius:12px;font-size:13px;font-weight:600;font-family:Inter,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,0.2);display:flex;align-items:center;gap:8px;transform:translateY(60px);opacity:0;transition:all 0.3s ease;';
+    document.body.appendChild(t);
+  }
+  t.innerHTML = '<i class="ri-checkbox-circle-line" style="font-size:16px;"></i>' + msg;
+  t.style.transform = 'translateY(0)';
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.transform = 'translateY(60px)'; t.style.opacity = '0'; }, 3000);
+}
+
+// ═══════════════ EXPOSE ADMIN ENTRY ═══════════════
+// Hidden admin access: type "alpha" anywhere + press A key 5x
+// Or click footer copyright 5 times
+applyDynamic();
+
+let adminClickCount = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  applyDynamic();
+  const copy = document.querySelector('footer');
+  if (copy) copy.addEventListener('click', (e) => {
+    if (e.target.tagName === 'P' && e.target.textContent.includes('©')) {
+      adminClickCount++;
+      if (adminClickCount >= 5) { adminClickCount = 0; openAdmin(); }
+    }
+  });
+});
+</script>
+
+<!-- Admin access button (hidden in footer, visible only if you know) -->
+<script>
+  // Also add an admin link in the footer bottom bar
+  document.addEventListener('DOMContentLoaded', () => {
+    const footerBar = document.querySelector('footer .border-t > div');
+    if (footerBar) {
+      const adminLink = document.createElement('button');
+      adminLink.textContent = 'Admin';
+      adminLink.onclick = openAdmin;
+      adminLink.style.cssText = 'background:transparent;border:none;color:rgba(255,255,255,0.15);font-size:11px;cursor:pointer;font-family:Inter,sans-serif;padding:0;';
+      adminLink.onmouseenter = () => adminLink.style.color = 'rgba(255,255,255,0.5)';
+      adminLink.onmouseleave = () => adminLink.style.color = 'rgba(255,255,255,0.15)';
+      footerBar.appendChild(adminLink);
+    }
+  });
+</script>
+</body>
+</html>
