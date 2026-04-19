@@ -14,7 +14,7 @@
         extend: {
           colors: {
             primary: '#3DA9F5',
-            charcoal: '#2B2B2B',
+            charcoal: '#111111',
             gold: '#C9A96E',
             offwhite: '#F5F5F5',
             lightgray: '#E8E8E8',
@@ -42,7 +42,7 @@
       padding-top: 0.75rem !important;
       padding-bottom: 0.75rem !important;
     }
-    #navbar.solid { background: #2B2B2B !important; }
+    #navbar.solid { background: #111111 !important; }
 
     /* Hero */
     .hero-overlay {
@@ -126,11 +126,17 @@
     }
     #lightbox.open { display: flex; }
 
-    /* Page hero separator */
+    /* Page hero */
+    .page-hero {
+      background: #111111;
+    }
+    .page-hero .ph-overlay {
+      background: #111111;
+    }
     .page-hero::after {
       content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, #3DA9F5, #C9A96E);
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #3DA9F5 0%, #C9A96E 60%, #3DA9F5 100%);
     }
 
     /* Active nav */
@@ -477,13 +483,15 @@
 <div id="page-about" class="page">
 
   <!-- Page Hero -->
-  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+  <div class="relative h-[352px] md:h-[422px] page-hero flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="" class="w-full h-full object-cover object-[60%_20%] opacity-25">
+      <img src="jason.jpg" alt="About Alpha Drywall" class="w-full h-full object-cover object-center" style="opacity:0.49;">
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
-      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">About Us</p>
-      <h1 class="text-4xl md:text-5xl font-black text-white">Our Story</h1>
+    <div class="absolute inset-0 ph-overlay"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+      <p class="text-gold text-xs font-bold tracking-[5px] uppercase mb-3">About Us</p>
+      <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-3">Our Story</h1>
+      <div style="width:48px;height:3px;background:linear-gradient(90deg,#3DA9F5,#C9A96E);border-radius:2px;"></div>
     </div>
   </div>
 
@@ -559,13 +567,15 @@
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SERVICES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <div id="page-services" class="page">
 
-  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+  <div class="relative h-[352px] md:h-[422px] page-hero flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="1743102911689.jpeg" alt="" class="w-full h-full object-cover opacity-25">
+      <img src="jason.jpg" alt="Alpha Drywall Services" class="w-full h-full object-cover object-center" style="opacity:0.49;">
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
-      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">What We Offer</p>
-      <h1 class="text-4xl md:text-5xl font-black text-white">Our Services</h1>
+    <div class="absolute inset-0 ph-overlay"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+      <p class="text-gold text-xs font-bold tracking-[5px] uppercase mb-3">What We Offer</p>
+      <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-3">Our Services</h1>
+      <div style="width:48px;height:3px;background:linear-gradient(90deg,#3DA9F5,#C9A96E);border-radius:2px;"></div>
     </div>
   </div>
 
@@ -683,13 +693,15 @@
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ GALLERY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <div id="page-gallery" class="page">
 
-  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+  <div class="relative h-[352px] md:h-[422px] page-hero flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="" class="w-full h-full object-cover opacity-25">
+      <img src="jason.jpg" alt="Alpha Drywall Gallery" class="w-full h-full object-cover object-center" style="opacity:0.49;">
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
-      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">Our Work</p>
-      <h1 class="text-4xl md:text-5xl font-black text-white">Project Gallery</h1>
+    <div class="absolute inset-0 ph-overlay"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+      <p class="text-gold text-xs font-bold tracking-[5px] uppercase mb-3">Our Work</p>
+      <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-3">Project Gallery</h1>
+      <div style="width:48px;height:3px;background:linear-gradient(90deg,#3DA9F5,#C9A96E);border-radius:2px;"></div>
     </div>
   </div>
 
@@ -767,13 +779,15 @@
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CONTACT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <div id="page-contact" class="page">
 
-  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+  <div class="relative h-[352px] md:h-[422px] page-hero flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="1743102911689.jpeg" alt="" class="w-full h-full object-cover opacity-20">
+      <img src="jason.jpg" alt="Contact Alpha Drywall" class="w-full h-full object-cover object-center" style="opacity:0.49;">
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
-      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">Get in Touch</p>
-      <h1 class="text-4xl md:text-5xl font-black text-white">Contact Us</h1>
+    <div class="absolute inset-0 ph-overlay"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+      <p class="text-gold text-xs font-bold tracking-[5px] uppercase mb-3">Get in Touch</p>
+      <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-3">Contact Us</h1>
+      <div style="width:48px;height:3px;background:linear-gradient(90deg,#3DA9F5,#C9A96E);border-radius:2px;"></div>
     </div>
   </div>
 
@@ -872,13 +886,15 @@
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ QUOTE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <div id="page-quote" class="page">
 
-  <div class="relative h-72 md:h-80 bg-charcoal flex items-end page-hero overflow-hidden">
+  <div class="relative h-[352px] md:h-[422px] page-hero flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="" class="w-full h-full object-cover object-[60%_center] opacity-28">
+      <img src="jason.jpg" alt="Free Quote Alpha Drywall" class="w-full h-full object-cover object-center" style="opacity:0.49;">
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pb-12 w-full">
-      <p class="text-gold text-xs font-bold tracking-[4px] uppercase mb-2">Free Estimate</p>
-      <h1 class="text-4xl md:text-5xl font-black text-white">Get a Free Quote</h1>
+    <div class="absolute inset-0 ph-overlay"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+      <p class="text-gold text-xs font-bold tracking-[5px] uppercase mb-3">Free Estimate</p>
+      <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-3">Get a Free Quote</h1>
+      <div style="width:48px;height:3px;background:linear-gradient(90deg,#3DA9F5,#C9A96E);border-radius:2px;"></div>
     </div>
   </div>
 
