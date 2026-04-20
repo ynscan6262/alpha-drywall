@@ -153,9 +153,41 @@
     }
     #toast.show { transform: translateY(0); opacity: 1; }
 
-    /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* 3D Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: perspective(900px) translateY(48px) rotateX(10deg);
+      transform-origin: 50% 100%;
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+    .reveal.from-top {
+      transform: perspective(900px) translateY(-40px) rotateX(-8deg);
+      transform-origin: 50% 0%;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: perspective(900px) translateY(0) rotateX(0deg);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: perspective(900px) translateX(-60px) rotateY(10deg);
+      transform-origin: 0% 50%;
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+    .reveal-left.visible { opacity: 1; transform: perspective(900px) translateX(0) rotateY(0deg); }
+    .reveal-right {
+      opacity: 0;
+      transform: perspective(900px) translateX(60px) rotateY(-10deg);
+      transform-origin: 100% 50%;
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+    .reveal-right.visible { opacity: 1; transform: perspective(900px) translateX(0) rotateY(0deg); }
 
     /* Logo SVG text fix */
     .logo-svg text { dominant-baseline: auto; }
@@ -566,7 +598,7 @@
       <div class="space-y-5">
 
         <!-- Row 1 -->
-        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-left">
           <div class="p-10 md:p-12">
             <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-layout-grid-line text-xl text-primary"></i></div>
             <h3 class="text-2xl font-black text-darktext mb-3">Drywall Installation</h3>
@@ -586,7 +618,7 @@
         </div>
 
         <!-- Row 2 -->
-        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-right">
           <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
             <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(3).jpeg" alt="Framing" class="w-full h-full object-cover">
           </div>
@@ -606,7 +638,7 @@
         </div>
 
         <!-- Row 3 -->
-        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-left">
           <div class="p-10 md:p-12">
             <div class="flex gap-3 mb-5">
               <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center"><i class="ri-paint-brush-line text-xl text-primary"></i></div>
@@ -631,7 +663,7 @@
       </div>
 
         <!-- Row 4 -->
-        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-right">
           <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
             <img src="WhatsApp%20Image%202026-04-17%20at%2020.41.28%20(1).jpeg" alt="Basement Renovation" class="w-full h-full object-cover">
           </div>
@@ -651,7 +683,7 @@
         </div>
 
         <!-- Row 5 -->
-        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-left">
           <div class="p-10 md:p-12">
             <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-community-line text-xl text-primary"></i></div>
             <h3 class="text-2xl font-black text-darktext mb-3">Interior Renovation</h3>
@@ -671,7 +703,7 @@
         </div>
 
         <!-- Row 6 -->
-        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
+        <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-right">
           <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
             <img src="1743102912971.jpeg" alt="Exterior Renovation" class="w-full h-full object-cover">
           </div>
@@ -1127,20 +1159,51 @@
     setTimeout(() => t.classList.remove('show'), 3800);
   }
 
-  // ── Scroll reveal ───────────────────────────────────────────
+  // ── 3D Scroll reveal ────────────────────────────────────────
+  let lastScrollY = 0;
+  let scrollDir = 'down';
+
+  window.addEventListener('scroll', () => {
+    scrollDir = window.scrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = window.scrollY;
+  }, { passive: true });
+
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
+        e.target.classList.remove('from-top');
         e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
+      } else {
+        // Re-arm for scroll-up replay
+        const rect = e.target.getBoundingClientRect();
+        const isAbove = rect.bottom < 0;
+        e.target.classList.remove('visible');
+        if (isAbove) {
+          e.target.classList.add('from-top');
+        } else {
+          e.target.classList.remove('from-top');
+        }
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  const revealSideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      } else {
+        e.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   function refreshReveal() {
     setTimeout(() => {
       document.querySelectorAll('#page-' + current + ' .reveal').forEach(el => {
         revealObserver.observe(el);
+      });
+      document.querySelectorAll('#page-' + current + ' .reveal-left, #page-' + current + ' .reveal-right').forEach(el => {
+        revealSideObserver.observe(el);
       });
     }, 80);
   }
