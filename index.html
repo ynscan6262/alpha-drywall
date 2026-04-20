@@ -185,8 +185,7 @@
           <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 shadow-sm rounded-sm z-[-1]"></div>
           <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Drywall Installation</button>
           <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Framing</button>
-          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Taping &amp; Mudding</button>
-          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Sanding &amp; Finishing</button>
+          <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Taping, Mudding &amp; Finishing</button>
           <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Basement Renovation</button>
           <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Interior Renovation</button>
           <button onclick="go('services')" class="block w-full text-left px-5 py-2.5 text-sm text-darktext hover:text-primary hover:bg-offwhite transition-colors">Exterior Renovation</button>
@@ -321,17 +320,8 @@
           <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
             <i class="ri-paint-brush-line text-2xl text-primary group-hover:text-white transition-colors"></i>
           </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Taping &amp; Mudding</h3>
-          <p class="text-muted text-sm leading-relaxed">Seamless joint finishing that creates a flawless, paint-ready surface every time.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-scissors-cut-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Sanding &amp; Finishing</h3>
-          <p class="text-muted text-sm leading-relaxed">Meticulous sanding to Level 5 perfection — the finest finish in the industry.</p>
+          <h3 class="text-base font-bold mb-2 text-darktext">Taping, Mudding &amp; Finishing</h3>
+          <p class="text-muted text-sm leading-relaxed">Seamless joint finishing and Level 5 sanding for a flawless, paint-ready surface every time.</p>
           <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
         </div>
 
@@ -618,15 +608,18 @@
         <!-- Row 3 -->
         <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite">
           <div class="p-10 md:p-12">
-            <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-paint-brush-line text-xl text-primary"></i></div>
-            <h3 class="text-2xl font-black text-darktext mb-3">Taping &amp; Mudding</h3>
+            <div class="flex gap-3 mb-5">
+              <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center"><i class="ri-paint-brush-line text-xl text-primary"></i></div>
+              <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center"><i class="ri-scissors-cut-line text-xl text-primary"></i></div>
+            </div>
+            <h3 class="text-2xl font-black text-darktext mb-3">Taping, Mudding &amp; Finishing</h3>
             <div class="divider divider-left mb-5"></div>
-            <p class="text-muted leading-relaxed mb-5 text-sm">The difference between average and exceptional lies in the taping and mudding. Our experienced tapers deliver smooth, seamless joints with Level 4 &amp; 5 finishes.</p>
+            <p class="text-muted leading-relaxed mb-5 text-sm">From seamless joint taping to Level 5 sanding, we handle the full finishing process — delivering a flawless, paint-ready surface on every project.</p>
             <ul class="space-y-2 text-muted text-sm mb-7">
               <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Paper &amp; mesh tape application</li>
               <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Multi-coat joint compound</li>
               <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Angle bead installation</li>
-              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Level 4 &amp; 5 paint-ready finish</li>
+              <li class="flex items-center gap-2.5"><i class="ri-check-line text-primary text-base"></i> Level 4 &amp; 5 sanding &amp; paint-ready finish</li>
             </ul>
             <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
           </div>
@@ -639,11 +632,6 @@
 
       <!-- More services grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-        <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
-          <i class="ri-scissors-cut-line text-3xl text-primary mb-4 block"></i>
-          <h3 class="text-xl font-black mb-3">Sanding &amp; Finishing</h3>
-          <p class="text-white/60 text-sm leading-relaxed">Meticulous sanding to Level 5 — the highest standard for a flawless, paint-ready surface on all walls and ceilings.</p>
-        </div>
         <div class="bg-charcoal rounded-2xl p-8 text-white card-hover">
           <i class="ri-home-4-line text-3xl text-primary mb-4 block"></i>
           <h3 class="text-xl font-black mb-3">Basement Renovation</h3>
@@ -805,7 +793,7 @@
                 <select class="f-input">
                   <option value="">Select a service…</option>
                   <option>Drywall Installation</option><option>Framing</option>
-                  <option>Taping &amp; Mudding</option><option>Sanding &amp; Finishing</option>
+                  <option>Taping, Mudding &amp; Finishing</option>
                   <option>Basement Renovation</option><option>Interior Renovation</option>
                   <option>Exterior Renovation</option>
                 </select>
@@ -914,7 +902,7 @@
               <select class="f-input" required>
                 <option value="">Select a service…</option>
                 <option>Drywall Installation</option><option>Framing</option>
-                <option>Taping &amp; Mudding</option><option>Sanding &amp; Finishing</option>
+                <option>Taping, Mudding &amp; Finishing</option>
                 <option>Basement Renovation</option><option>Interior Renovation</option>
                 <option>Exterior Renovation</option><option>Other</option>
               </select>
@@ -1701,7 +1689,7 @@ function renderGallery() {
             <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Category</label>
             <select id="gal-cat" class="a-input">
               <option>Drywall Installation</option><option>Framing</option>
-              <option>Taping & Mudding</option><option>Sanding & Finishing</option>
+              <option>Taping, Mudding & Finishing</option>
               <option>Basement Renovation</option><option>Interior Renovation</option><option>Exterior Renovation</option>
             </select>
           </div>
