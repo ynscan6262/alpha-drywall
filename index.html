@@ -8,6 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -1273,13 +1275,25 @@
 </style>
 
 <script>
-// ═══════════════ ADMIN DATA (localStorage) ═══════════════
+// ═══════════════ ADMIN DATA (Firestore) ═══════════════
+const _fbCfg = {
+  apiKey:"AIzaSyAWFp3XXNtDXHTjrdTFSTHgQdK_gcDld8g",
+  authDomain:"alpha-drywall-44c02.firebaseapp.com",
+  projectId:"alpha-drywall-44c02",
+  storageBucket:"alpha-drywall-44c02.firebasestorage.app",
+  messagingSenderId:"44091456875",
+  appId:"1:44091456875:web:1f03d7adbff5b09da8a02e"
+};
+firebase.initializeApp(_fbCfg);
+const _db = firebase.firestore();
+const _cache = {};
+
 function aData(key, def) {
-  try { return JSON.parse(localStorage.getItem('alpha_' + key)) || def; }
-  catch(e) { return def; }
+  return (key in _cache) ? _cache[key] : (def !== undefined ? def : null);
 }
 function aSave(key, val) {
-  localStorage.setItem('alpha_' + key, JSON.stringify(val));
+  _cache[key] = val;
+  _db.collection('alpha').doc(key).set({ value: val }).catch(e => console.warn('Firestore write:', e));
 }
 
 // ═══════════════ DYNAMIC CONTENT ENGINE ═══════════════
@@ -1443,7 +1457,7 @@ function updateServiceDropdowns() {
 }
 
 // Seed demo data on first load
-(function seedDemo() {
+async function seedDemo() {
   if (aData('seeded_v4', false)) return;
   aSave('messages', [
     { id:1, name:'Michael T.', email:'michael@email.com', phone:'(416) 555-1111', service:'Basement Renovation', message:'Hi, I need a quote for finishing my 1200sqft basement. Looking to start in May.', read:false, date:'2026-04-15' },
@@ -1527,6 +1541,22 @@ function updateServiceDropdowns() {
     seoDesc: 'Professional drywall installation, framing, renovation services in Toronto & GTA. Licensed, insured, and committed to excellence.',
   });
   aSave('seeded_v4', true);
+}
+
+// Initialize: load Firestore → seed → render → real-time sync
+(async () => {
+  try {
+    const snap = await _db.collection('alpha').get();
+    snap.forEach(doc => { _cache[doc.id] = doc.data().value; });
+  } catch(e) { console.warn('Firestore load:', e); }
+  await seedDemo();
+  applyDynamic();
+  _db.collection('alpha').onSnapshot(snap => {
+    snap.docChanges().forEach(ch => {
+      if (ch.type !== 'removed') _cache[ch.doc.id] = ch.doc.data().value;
+    });
+    applyDynamic();
+  }, e => console.warn('Firestore sync:', e));
 })();
 
 // ═══════════════ AUTH ═══════════════
