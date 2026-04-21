@@ -334,62 +334,8 @@
         <p class="text-muted max-w-lg mx-auto mt-4 reveal">Expert craftsmanship across a full range of drywall and renovation services.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-13 h-13 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-layout-grid-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Drywall Installation</h3>
-          <p class="text-muted text-sm leading-relaxed">Precision installation for new builds and renovations, including complex curved designs.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-building-4-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Framing</h3>
-          <p class="text-muted text-sm leading-relaxed">Steel &amp; wood framing systems for partitions, soffits, and complete structural builds.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-paint-brush-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Taping, Mudding &amp; Finishing</h3>
-          <p class="text-muted text-sm leading-relaxed">Seamless joint finishing and Level 5 sanding for a flawless, paint-ready surface every time.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-home-4-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Basement Renovation</h3>
-          <p class="text-muted text-sm leading-relaxed">Transform unfinished basements into beautiful, fully functional living spaces.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-community-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Interior Renovation</h3>
-          <p class="text-muted text-sm leading-relaxed">Full-scope interior renovation — kitchens, bathrooms, living spaces, and more.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
-        <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
-            <i class="ri-home-smile-line text-2xl text-primary group-hover:text-white transition-colors"></i>
-          </div>
-          <h3 class="text-base font-bold mb-2 text-darktext">Exterior Renovation</h3>
-          <p class="text-muted text-sm leading-relaxed">Curb appeal upgrades — siding, facades, exterior finishing, and structural improvements.</p>
-          <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
-        </div>
-
+      <div id="home-svc-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- rendered by renderHomeServices() -->
       </div>
       <div class="text-center mt-12 reveal">
         <button onclick="go('services')" class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all">
@@ -765,82 +711,8 @@
     <div class="max-w-7xl mx-auto px-5 sm:px-8">
       <p class="text-center text-muted mb-16 max-w-2xl mx-auto">Browse our portfolio of completed drywall and renovation projects across Toronto and the Greater Toronto Area. Click any image to enlarge.</p>
 
-      <!-- ── SECTION 1: Completed Projects ── -->
-      <div class="mb-20">
-        <div class="mb-7 reveal">
-          <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-1">Portfolio</p>
-          <h3 class="text-2xl md:text-3xl font-black text-darktext mb-2">Completed Projects</h3>
-          <div class="divider divider-left"></div>
-        </div>
-        <div class="collage reveal">
-          <div class="gal-cell" style="grid-column:span 2;grid-row:span 2;" onclick="lb(this)"><img src="gallery-1.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-2.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-3.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-4.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-5.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-6.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-7.jpg" alt="Project"></div>
-          <div class="gal-cell" style="grid-column:span 2;grid-row:span 2;" onclick="lb(this)"><img src="gallery-8.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-9.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-10.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-11.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-12.jpg" alt="Project"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="gallery-13.jpg" alt="Project"></div>
-        </div>
-      </div>
-
-      <!-- ── SECTION 2: Drywall & Framing ── -->
-      <div class="mb-20">
-        <div class="mb-7 reveal">
-          <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-1">Expertise</p>
-          <h3 class="text-2xl md:text-3xl font-black text-darktext mb-2">Drywall & Framing</h3>
-          <div class="divider divider-left"></div>
-        </div>
-        <div class="collage reveal">
-          <div class="gal-cell" style="grid-column:span 2;grid-row:span 2;" onclick="lb(this)"><img src="duvar-profil.jpg" alt="Framing"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="whatsapp-1.jpg" alt="Drywall"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="whatsapp-0.jpg" alt="Drywall"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="whatsapp-3.jpg" alt="Drywall"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="1743102911689.jpeg" alt="Drywall"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="drywall-work.jpg" alt="Drywall work"></div>
-          <div class="gal-cell" style="grid-column:span 2;grid-row:span 2;" onclick="lb(this)"><img src="wall-construction.jpg" alt="Wall construction"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="1743102912971.jpeg" alt="Drywall"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="1743102914968.jpeg" alt="Drywall"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="1743102917963.jpeg" alt="Drywall"></div>
-        </div>
-      </div>
-
-      <!-- ── SECTION 3: Renovation Projects ── -->
-      <div class="mb-20">
-        <div class="mb-7 reveal">
-          <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-1">Transformation</p>
-          <h3 class="text-2xl md:text-3xl font-black text-darktext mb-2">Renovation Projects</h3>
-          <div class="divider divider-left"></div>
-        </div>
-        <div class="collage reveal">
-          <div class="gal-cell" style="grid-column:span 2;grid-row:span 2;" onclick="lb(this)"><img src="basement-remodel.jpg" alt="Basement renovation"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="interior-home.jpg" alt="Interior renovation"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="exterior-renovation.jpg" alt="Exterior renovation"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="building-process.jpg" alt="Building process"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="1743102912283.jpeg" alt="Renovation"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="photo-extra.jpg" alt="Renovation"></div>
-        </div>
-      </div>
-
-      <!-- ── SECTION 4: Interior & Design ── -->
-      <div class="mb-4">
-        <div class="mb-7 reveal">
-          <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-1">Aesthetic</p>
-          <h3 class="text-2xl md:text-3xl font-black text-darktext mb-2">Interior & Design</h3>
-          <div class="divider divider-left"></div>
-        </div>
-        <div class="collage reveal">
-          <div class="gal-cell" style="grid-column:span 2;grid-row:span 2;" onclick="lb(this)"><img src="vip-lounge.jpg" alt="Interior design"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="relaxed-curves.jpg" alt="Interior design"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="jason.jpg" alt="Drywall finishing"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="city-solo.jpg" alt="City architecture"></div>
-          <div class="gal-cell" onclick="lb(this)"><img src="jobsite-photo.jpg" alt="Job site"></div>
-        </div>
+      <div id="gallery-sections">
+        <!-- rendered by renderGalleryPage() -->
       </div>
 
     </div>
@@ -900,7 +772,7 @@
               </div>
               <div>
                 <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Service Interested In</label>
-                <select class="f-input">
+                <select id="contact-svc-select" class="f-input">
                   <option value="">Select a service…</option>
                   <option>Drywall Installation</option><option>Framing</option>
                   <option>Taping, Mudding &amp; Finishing</option>
@@ -1009,7 +881,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Service Type *</label>
-              <select class="f-input" required>
+              <select id="quote-svc-select" class="f-input" required>
                 <option value="">Select a service…</option>
                 <option>Drywall Installation</option><option>Framing</option>
                 <option>Taping, Mudding &amp; Finishing</option>
@@ -1488,38 +1360,148 @@ function applyDynamic() {
   if (c.seoTitle) document.title = c.seoTitle;
   const md = document.querySelector('meta[name="description"]');
   if (md && c.seoDesc) md.setAttribute('content', c.seoDesc);
+
+  renderHomeServices();
+  renderGalleryPage();
+  updateServiceDropdowns();
+}
+
+// ═══════════════ DYNAMIC PAGE RENDERERS ═══════════════
+
+const GALLERY_SECTIONS = [
+  { key:'completed',  label:'Completed Projects',  sub:'Portfolio' },
+  { key:'drywall',    label:'Drywall & Framing',    sub:'Expertise' },
+  { key:'renovation', label:'Renovation Projects',  sub:'Transformation' },
+  { key:'interior',   label:'Interior & Design',    sub:'Aesthetic' },
+];
+
+const SVC_ICONS = {
+  'Drywall Installation':        'ri-layout-grid-line',
+  'Framing':                     'ri-building-4-line',
+  'Taping, Mudding & Finishing': 'ri-paint-brush-line',
+  'Taping & Mudding':            'ri-paint-brush-line',
+  'Basement Renovation':         'ri-home-4-line',
+  'Interior Renovation':         'ri-community-line',
+  'Exterior Renovation':         'ri-home-smile-line',
+};
+
+function renderHomeServices() {
+  const el = document.getElementById('home-svc-grid');
+  if (!el) return;
+  const svcs = aData('services', []).filter(s => s.active);
+  if (!svcs.length) return;
+  el.innerHTML = svcs.map(s => `
+    <div class="card-hover bg-offwhite rounded-2xl p-7 cursor-pointer group reveal" onclick="go('services')">
+      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary transition-colors duration-300">
+        <i class="${SVC_ICONS[s.title] || s.icon || 'ri-hammer-line'} text-2xl text-primary group-hover:text-white transition-colors"></i>
+      </div>
+      <h3 class="text-base font-bold mb-2 text-darktext">${s.title}</h3>
+      <p class="text-muted text-sm leading-relaxed">${s.desc}</p>
+      <div class="mt-5 flex items-center text-primary text-xs font-bold gap-1 group-hover:gap-2 transition-all">Learn More <i class="ri-arrow-right-line"></i></div>
+    </div>
+  `).join('');
+  setTimeout(() => refreshReveal(), 80);
+}
+
+function renderGalleryPage() {
+  const el = document.getElementById('gallery-sections');
+  if (!el) return;
+  const items = aData('gallery', []);
+  const sections = GALLERY_SECTIONS.map(s => ({
+    ...s, photos: items.filter(p => p.section === s.key)
+  })).filter(s => s.photos.length > 0);
+  if (!sections.length) return;
+  el.innerHTML = sections.map((s, si) => `
+    <div class="${si < sections.length - 1 ? 'mb-20' : 'mb-4'}">
+      <div class="mb-7 reveal">
+        <p class="text-primary text-xs font-bold tracking-[4px] uppercase mb-1">${s.sub}</p>
+        <h3 class="text-2xl md:text-3xl font-black text-darktext mb-2">${s.label}</h3>
+        <div class="divider divider-left"></div>
+      </div>
+      <div class="collage reveal">
+        ${s.photos.map((p, i) => {
+          const big = i === 0 || (s.photos.length > 6 && i === 7);
+          return `<div class="gal-cell"${big ? ' style="grid-column:span 2;grid-row:span 2;"' : ''} onclick="lb(this)"><img src="${p.file}" alt="${p.title}"></div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+  setTimeout(() => refreshReveal(), 80);
+}
+
+function updateServiceDropdowns() {
+  const svcs = aData('services', []).filter(s => s.active).map(s => s.title);
+  [['contact-svc-select', false], ['quote-svc-select', true]].forEach(([id, addOther]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const first = el.options[0];
+    el.innerHTML = '';
+    el.appendChild(first.cloneNode(true));
+    svcs.forEach(t => { const o = document.createElement('option'); o.textContent = t; el.appendChild(o); });
+    if (addOther) { const o = document.createElement('option'); o.textContent = 'Other'; el.appendChild(o); }
+  });
 }
 
 // Seed demo data on first load
 (function seedDemo() {
-  if (aData('seeded', false)) return;
+  if (aData('seeded_v3', false)) return;
   aSave('messages', [
     { id:1, name:'Michael T.', email:'michael@email.com', phone:'(416) 555-1111', service:'Basement Renovation', message:'Hi, I need a quote for finishing my 1200sqft basement. Looking to start in May.', read:false, date:'2026-04-15' },
     { id:2, name:'Sarah K.', email:'sarah@company.com', phone:'(647) 555-2222', service:'Framing', message:'We need commercial framing for our new office space in Mississauga — approximately 3000sqft.', read:false, date:'2026-04-16' },
     { id:3, name:'James R.', email:'james@email.com', phone:'(905) 555-3333', service:'Drywall Installation', message:'Looking for drywall installation for a home addition — about 800sqft. Can you provide a free estimate?', read:true, date:'2026-04-14' },
   ]);
   aSave('quotes', [
-    { id:1, name:'Linda M.', email:'linda@email.com', phone:'(416) 555-4444', service:'Taping & Finishing', description:'Full taping and Level 5 finish for a new build — 2400sqft total.', contact:'email', startDate:'2026-05-01', status:'new', date:'2026-04-16' },
-    { id:2, name:'David C.', email:'david@email.com', phone:'(647) 555-5555', service:'Ceiling Work', description:'Custom coffered ceiling for master bedroom and living room.', contact:'phone', startDate:'2026-05-15', status:'reviewed', date:'2026-04-15' },
-    { id:3, name:'Priya N.', email:'priya@email.com', phone:'(905) 555-6666', service:'General Renovation', description:'Full home addition — 600sqft including framing, drywall, taping and paint.', contact:'email', startDate:'2026-06-01', status:'contacted', date:'2026-04-13' },
+    { id:1, name:'Linda M.', email:'linda@email.com', phone:'(416) 555-4444', service:'Taping, Mudding & Finishing', description:'Full taping and Level 5 finish for a new build — 2400sqft total.', contact:'email', startDate:'2026-05-01', status:'new', date:'2026-04-16' },
+    { id:2, name:'David C.', email:'david@email.com', phone:'(647) 555-5555', service:'Basement Renovation', description:'Full basement finish — 1100sqft including framing, drywall and taping.', contact:'phone', startDate:'2026-05-15', status:'reviewed', date:'2026-04-15' },
+    { id:3, name:'Priya N.', email:'priya@email.com', phone:'(905) 555-6666', service:'Interior Renovation', description:'Full home addition — 600sqft including framing, drywall, taping and finishing.', contact:'email', startDate:'2026-06-01', status:'contacted', date:'2026-04-13' },
   ]);
   aSave('services', [
-    { id:1, title:'Drywall Installation', icon:'ri-layout-grid-line', desc:'Precision installation for new builds and renovations.', active:true },
-    { id:2, title:'Framing', icon:'ri-building-4-line', desc:'Steel & wood framing for partitions and commercial spaces.', active:true },
-    { id:3, title:'Taping & Mudding', icon:'ri-paint-brush-line', desc:'Seamless joint finishing for a flawless paint-ready surface.', active:true },
-    { id:4, title:'Sanding & Finishing', icon:'ri-scissors-cut-line', desc:'Level 5 sanding for the finest finish in the industry.', active:true },
-    { id:5, title:'Basement Renovation', icon:'ri-home-4-line', desc:'Transform unfinished basements into beautiful living spaces.', active:true },
-    { id:6, title:'Painting', icon:'ri-palette-line', desc:'Interior painting with premium materials.', active:true },
-    { id:7, title:'Ceiling Work', icon:'ri-tools-line', desc:'Custom ceiling systems — coffered, tray, and drop ceilings.', active:true },
-    { id:8, title:'General Renovation', icon:'ri-hammer-line', desc:'Full-scope renovation for residential and commercial properties.', active:true },
+    { id:1, title:'Drywall Installation',       icon:'ri-layout-grid-line',  desc:'Precision installation for new builds and renovations, including complex curved designs.', active:true },
+    { id:2, title:'Framing',                    icon:'ri-building-4-line',   desc:'Steel & wood framing systems for partitions, soffits, and complete structural builds.', active:true },
+    { id:3, title:'Taping, Mudding & Finishing',icon:'ri-paint-brush-line',  desc:'Seamless joint finishing and Level 5 sanding for a flawless, paint-ready surface every time.', active:true },
+    { id:4, title:'Basement Renovation',        icon:'ri-home-4-line',       desc:'Transform unfinished basements into beautiful, fully functional living spaces.', active:true },
+    { id:5, title:'Interior Renovation',        icon:'ri-community-line',    desc:'Full-scope interior renovation — kitchens, bathrooms, living spaces, and more.', active:true },
+    { id:6, title:'Exterior Renovation',        icon:'ri-home-smile-line',   desc:'Curb appeal upgrades — siding, facades, exterior finishing, and structural improvements.', active:true },
   ]);
   aSave('gallery', [
-    { id:1, title:'Curved Ceiling Framing', category:'Framing', file:'1743102911689.jpeg', desc:'Commercial project — Toronto, ON' },
-    { id:2, title:'Stairwell Drywall Finishing', category:'Drywall Installation', file:'WhatsApp Image 2026-04-17 at 20.41.28 (1).jpeg', desc:'Residential — North York, ON' },
-    { id:3, title:'Arched Doorway Corridor', category:'Drywall Installation', file:'WhatsApp Image 2026-04-17 at 20.41.28 (3).jpeg', desc:'Residential — Mississauga, ON' },
-    { id:4, title:'Panel Installation Prep', category:'Drywall Installation', file:'1743102917963.jpeg', desc:'Commercial — Toronto, ON' },
-    { id:5, title:'Custom Curved Drywall', category:'Taping & Mudding', file:'1743102914968.jpeg', desc:'Specialty Work — Toronto, ON' },
-    { id:6, title:'Corner Bead Detail', category:'Sanding & Finishing', file:'1743102912283.jpeg', desc:'Finishing — GTA' },
+    // Completed Projects
+    { id:101, title:'Project 1',  section:'completed', file:'gallery-1.jpg',  desc:'GTA' },
+    { id:102, title:'Project 2',  section:'completed', file:'gallery-2.jpg',  desc:'Toronto, ON' },
+    { id:103, title:'Project 3',  section:'completed', file:'gallery-3.jpg',  desc:'North York, ON' },
+    { id:104, title:'Project 4',  section:'completed', file:'gallery-4.jpg',  desc:'Mississauga, ON' },
+    { id:105, title:'Project 5',  section:'completed', file:'gallery-5.jpg',  desc:'Toronto, ON' },
+    { id:106, title:'Project 6',  section:'completed', file:'gallery-6.jpg',  desc:'GTA' },
+    { id:107, title:'Project 7',  section:'completed', file:'gallery-7.jpg',  desc:'Toronto, ON' },
+    { id:108, title:'Project 8',  section:'completed', file:'gallery-8.jpg',  desc:'North York, ON' },
+    { id:109, title:'Project 9',  section:'completed', file:'gallery-9.jpg',  desc:'Mississauga, ON' },
+    { id:110, title:'Project 10', section:'completed', file:'gallery-10.jpg', desc:'GTA' },
+    { id:111, title:'Project 11', section:'completed', file:'gallery-11.jpg', desc:'Toronto, ON' },
+    { id:112, title:'Project 12', section:'completed', file:'gallery-12.jpg', desc:'Toronto, ON' },
+    { id:113, title:'Project 13', section:'completed', file:'gallery-13.jpg', desc:'GTA' },
+    // Drywall & Framing
+    { id:201, title:'Framing Profile',     section:'drywall', file:'duvar-profil.jpg',      desc:'Framing' },
+    { id:202, title:'Site Photo 1',        section:'drywall', file:'whatsapp-1.jpg',         desc:'Drywall' },
+    { id:203, title:'Site Photo 2',        section:'drywall', file:'whatsapp-0.jpg',         desc:'Drywall' },
+    { id:204, title:'Site Photo 3',        section:'drywall', file:'whatsapp-3.jpg',         desc:'Drywall' },
+    { id:205, title:'Ceiling Framing',     section:'drywall', file:'1743102911689.jpeg',     desc:'Commercial' },
+    { id:206, title:'Drywall Work',        section:'drywall', file:'drywall-work.jpg',       desc:'Drywall' },
+    { id:207, title:'Wall Construction',   section:'drywall', file:'wall-construction.jpg',  desc:'Commercial' },
+    { id:208, title:'Panel Installation',  section:'drywall', file:'1743102912971.jpeg',     desc:'Commercial' },
+    { id:209, title:'Curved Drywall',      section:'drywall', file:'1743102914968.jpeg',     desc:'Specialty' },
+    { id:210, title:'Drywall Panels',      section:'drywall', file:'1743102917963.jpeg',     desc:'Commercial' },
+    // Renovation Projects
+    { id:301, title:'Basement Renovation', section:'renovation', file:'basement-remodel.jpg',    desc:'Residential' },
+    { id:302, title:'Exterior Renovation', section:'renovation', file:'exterior-renovation.jpg', desc:'Residential' },
+    { id:303, title:'Interior Renovation', section:'renovation', file:'interior-home.jpg',        desc:'Residential' },
+    { id:304, title:'Building Process',    section:'renovation', file:'building-process.jpg',     desc:'Residential' },
+    { id:305, title:'Corner Detail',       section:'renovation', file:'1743102912283.jpeg',       desc:'Finishing' },
+    { id:306, title:'Renovation Work',     section:'renovation', file:'photo-extra.jpg',          desc:'GTA' },
+    // Interior & Design
+    { id:401, title:'VIP Lounge Design',   section:'interior', file:'vip-lounge.jpg',      desc:'Commercial' },
+    { id:402, title:'Relaxed Curves',      section:'interior', file:'relaxed-curves.jpg',  desc:'Residential' },
+    { id:403, title:'Drywall Finishing',   section:'interior', file:'jason.jpg',           desc:'Residential' },
+    { id:404, title:'City Architecture',   section:'interior', file:'city-solo.jpg',       desc:'Urban' },
+    { id:405, title:'Job Site',            section:'interior', file:'jobsite-photo.jpg',   desc:'Site' },
   ]);
   aSave('settings', {
     phone: '(555) 123-4567',
@@ -1544,7 +1526,7 @@ function applyDynamic() {
     seoTitle: 'Alpha Drywall and Renovation | In Search for Excellence',
     seoDesc: 'Professional drywall installation, framing, renovation services in Toronto & GTA. Licensed, insured, and committed to excellence.',
   });
-  aSave('seeded', true);
+  aSave('seeded_v3', true);
 })();
 
 // ═══════════════ AUTH ═══════════════
@@ -1778,6 +1760,8 @@ function saveService() {
   aSave('services', svcs);
   closeServiceModal();
   renderServices();
+  renderHomeServices();
+  updateServiceDropdowns();
   adminToast('Service added successfully!');
 }
 function toggleService(id) {
@@ -1786,11 +1770,15 @@ function toggleService(id) {
   if (s) s.active = !s.active;
   aSave('services', svcs);
   renderServices();
+  renderHomeServices();
+  updateServiceDropdowns();
 }
 function deleteService(id) {
   if (!confirm('Delete this service?')) return;
   aSave('services', aData('services', []).filter(s => s.id !== id));
   renderServices();
+  renderHomeServices();
+  updateServiceDropdowns();
   adminToast('Service deleted.');
 }
 
@@ -1810,7 +1798,7 @@ function renderGallery() {
             </div>
             <div style="padding:10px 12px;">
               <p style="margin:0;font-size:12px;font-weight:700;color:#1A1A1A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${g.title}</p>
-              <p style="margin:2px 0 6px;font-size:11px;color:#6B7280;">${g.category}</p>
+              <p style="margin:2px 0 6px;font-size:11px;color:#6B7280;">${{completed:'Completed Projects',drywall:'Drywall & Framing',renovation:'Renovation Projects',interior:'Interior & Design'}[g.section] || g.category}</p>
               <button class="a-btn a-btn-red" onclick="deleteGallery(${g.id})" style="width:100%;justify-content:center;display:flex;align-items:center;gap:4px;"><i class="ri-delete-bin-line"></i> Remove</button>
             </div>
           </div>
@@ -1827,13 +1815,22 @@ function renderGallery() {
             <input id="gal-title" class="a-input" placeholder="Project title">
           </div>
           <div>
-            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Category</label>
-            <select id="gal-cat" class="a-input">
-              <option>Drywall Installation</option><option>Framing</option>
-              <option>Taping, Mudding & Finishing</option>
-              <option>Basement Renovation</option><option>Interior Renovation</option><option>Exterior Renovation</option>
+            <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Gallery Section</label>
+            <select id="gal-section" class="a-input">
+              <option value="completed">Completed Projects</option>
+              <option value="drywall">Drywall & Framing</option>
+              <option value="renovation">Renovation Projects</option>
+              <option value="interior">Interior & Design</option>
             </select>
           </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Category</label>
+          <select id="gal-cat" class="a-input">
+            <option>Drywall Installation</option><option>Framing</option>
+            <option>Taping, Mudding & Finishing</option>
+            <option>Basement Renovation</option><option>Interior Renovation</option><option>Exterior Renovation</option>
+          </select>
         </div>
         <div style="margin-bottom:12px;">
           <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Description</label>
@@ -1852,18 +1849,21 @@ function deleteGallery(id) {
   if (!confirm('Remove this item from gallery?')) return;
   aSave('gallery', aData('gallery', []).filter(g => g.id !== id));
   renderGallery();
+  renderGalleryPage();
   adminToast('Gallery item removed.');
 }
 function addGallery() {
-  const title = document.getElementById('gal-title').value.trim();
-  const cat   = document.getElementById('gal-cat').value;
-  const desc  = document.getElementById('gal-desc').value.trim();
-  const file  = document.getElementById('gal-file').value.trim();
+  const title   = document.getElementById('gal-title').value.trim();
+  const section = document.getElementById('gal-section').value;
+  const cat     = document.getElementById('gal-cat').value;
+  const desc    = document.getElementById('gal-desc').value.trim();
+  const file    = document.getElementById('gal-file').value.trim();
   if (!title || !file) { alert('Title and filename are required.'); return; }
   const items = aData('gallery', []);
-  items.push({ id: Date.now(), title, category: cat, file, desc });
+  items.push({ id: Date.now(), title, section, category: cat, file, desc });
   aSave('gallery', items);
   renderGallery();
+  renderGalleryPage();
   adminToast('Added to gallery!');
 }
 
