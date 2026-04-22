@@ -1296,6 +1296,27 @@ function aSave(key, val) {
   _db.collection('alpha').doc(key).set({ value: val }).catch(e => console.warn('Firestore write:', e));
 }
 
+// ═══════════════ CLOUDINARY UPLOAD ═══════════════
+const _CLD_CLOUD = 'difzgwfxo';
+const _CLD_PRESET = 'alpha_uploads';
+
+async function uploadToCloudinary(file, progressId) {
+  const type = file.type.startsWith('video/') ? 'video' : 'image';
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', _CLD_PRESET);
+  if (progressId) {
+    const el = document.getElementById(progressId);
+    if (el) el.textContent = 'Uploading...';
+  }
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${_CLD_CLOUD}/${type}/upload`, {
+    method: 'POST', body: formData
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.secure_url;
+}
+
 // ═══════════════ DYNAMIC CONTENT ENGINE ═══════════════
 function applyDynamic() {
   const s = aData('settings', {});
@@ -1867,8 +1888,15 @@ function renderGallery() {
           <input id="gal-desc" class="a-input" placeholder="e.g. Residential — Toronto, ON">
         </div>
         <div style="margin-bottom:16px;">
-          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Image File (from site folder)</label>
-          <input id="gal-file" class="a-input" placeholder="filename.jpg">
+          <label style="display:block;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Photo / Video</label>
+          <div id="gal-drop" onclick="document.getElementById('gal-file-input').click()" style="border:2px dashed #E8E8E8;border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#3DA9F5'" onmouseout="this.style.borderColor='#E8E8E8'">
+            <input type="file" id="gal-file-input" accept="image/*,video/*" style="display:none" onchange="handleGalUpload(this)">
+            <div id="gal-upload-status">
+              <i class="ri-upload-cloud-2-line" style="font-size:28px;color:#9CA3AF;display:block;margin-bottom:6px;"></i>
+              <p style="margin:0;font-size:12px;color:#6B7280;">Click to select photo or video</p>
+            </div>
+          </div>
+          <input type="hidden" id="gal-url">
         </div>
         <button class="a-btn a-btn-blue" onclick="addGallery()"><i class="ri-add-line"></i> Add to Gallery</button>
       </div>
@@ -1882,13 +1910,32 @@ function deleteGallery(id) {
   renderGalleryPage();
   adminToast('Gallery item removed.');
 }
+async function handleGalUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const status = document.getElementById('gal-upload-status');
+  status.innerHTML = '<p style="margin:0;font-size:12px;color:#3DA9F5;"><i class="ri-loader-4-line"></i> Uploading...</p>';
+  try {
+    const url = await uploadToCloudinary(file);
+    document.getElementById('gal-url').value = url;
+    const isVideo = file.type.startsWith('video/');
+    status.innerHTML = `
+      <p style="margin:0 0 6px;font-size:12px;color:#10B981;font-weight:600;"><i class="ri-checkbox-circle-line"></i> Uploaded!</p>
+      ${isVideo
+        ? `<video src="${url}" style="max-height:60px;border-radius:6px;" muted></video>`
+        : `<img src="${url}" style="max-height:60px;border-radius:6px;">`}
+    `;
+  } catch(e) {
+    status.innerHTML = `<p style="margin:0;font-size:12px;color:#EF4444;"><i class="ri-error-warning-line"></i> ${e.message}</p>`;
+  }
+}
 function addGallery() {
   const title   = document.getElementById('gal-title').value.trim();
   const section = document.getElementById('gal-section').value;
   const cat     = document.getElementById('gal-cat').value;
   const desc    = document.getElementById('gal-desc').value.trim();
-  const file    = document.getElementById('gal-file').value.trim();
-  if (!title || !file) { alert('Title and filename are required.'); return; }
+  const file    = document.getElementById('gal-url').value.trim();
+  if (!title || !file) { alert('Title and photo are required. Please upload a photo first.'); return; }
   const items = aData('gallery', []);
   items.push({ id: Date.now(), title, section, category: cat, file, desc });
   aSave('gallery', items);
