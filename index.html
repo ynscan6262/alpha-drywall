@@ -1308,25 +1308,29 @@
 
 <script>
 // ═══════════════ ADMIN DATA (Firestore) ═══════════════
-const _fbCfg = {
-  apiKey:"AIzaSyAWFp3XXNtDXHTjrdTFSTHgQdK_gcDld8g",
-  authDomain:"alpha-drywall-44c02.firebaseapp.com",
-  projectId:"alpha-drywall-44c02",
-  storageBucket:"alpha-drywall-44c02.firebasestorage.app",
-  messagingSenderId:"44091456875",
-  appId:"1:44091456875:web:1f03d7adbff5b09da8a02e"
-};
-firebase.initializeApp(_fbCfg);
-const _db = firebase.firestore();
 const _cache = {};
+let _db = null;
 
 function aData(key, def) {
   return (key in _cache) ? _cache[key] : (def !== undefined ? def : null);
 }
 function aSave(key, val) {
   _cache[key] = val;
-  _db.collection('alpha').doc(key).set({ value: val }).catch(e => console.warn('Firestore write:', e));
+  if (_db) _db.collection('alpha').doc(key).set({ value: val }).catch(e => console.warn('Firestore write:', e));
 }
+
+try {
+  const _fbCfg = {
+    apiKey:"AIzaSyAWFp3XXNtDXHTjrdTFSTHgQdK_gcDld8g",
+    authDomain:"alpha-drywall-44c02.firebaseapp.com",
+    projectId:"alpha-drywall-44c02",
+    storageBucket:"alpha-drywall-44c02.firebasestorage.app",
+    messagingSenderId:"44091456875",
+    appId:"1:44091456875:web:1f03d7adbff5b09da8a02e"
+  };
+  firebase.initializeApp(_fbCfg);
+  _db = firebase.firestore();
+} catch(e) { console.warn('Firebase init failed:', e); }
 
 // ═══════════════ CLOUDINARY UPLOAD ═══════════════
 const _CLD_CLOUD = 'difzgwfxo';
@@ -1598,18 +1602,22 @@ async function seedDemo() {
 
 // Initialize: load Firestore → seed → render → real-time sync
 (async () => {
-  try {
-    const snap = await _db.collection('alpha').get();
-    snap.forEach(doc => { _cache[doc.id] = doc.data().value; });
-  } catch(e) { console.warn('Firestore load:', e); }
+  if (_db) {
+    try {
+      const snap = await _db.collection('alpha').get();
+      snap.forEach(doc => { _cache[doc.id] = doc.data().value; });
+    } catch(e) { console.warn('Firestore load:', e); }
+  }
   await seedDemo();
   applyDynamic();
-  _db.collection('alpha').onSnapshot(snap => {
-    snap.docChanges().forEach(ch => {
-      if (ch.type !== 'removed') _cache[ch.doc.id] = ch.doc.data().value;
-    });
-    applyDynamic();
-  }, e => console.warn('Firestore sync:', e));
+  if (_db) {
+    _db.collection('alpha').onSnapshot(snap => {
+      snap.docChanges().forEach(ch => {
+        if (ch.type !== 'removed') _cache[ch.doc.id] = ch.doc.data().value;
+      });
+      applyDynamic();
+    }, e => console.warn('Firestore sync:', e));
+  }
 })();
 
 // ═══════════════ AUTH ═══════════════
