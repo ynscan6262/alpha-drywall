@@ -1053,8 +1053,24 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
   // ── Forms ──────────────────────────────────────────────────
+  async function sendEmail(params) {
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service_id: 'service_njiwkzq',
+        template_id: 'template_32rsbqa',
+        user_id: '8t95T81CsTUvRwZ-J',
+        template_params: params
+      })
+    });
+    if (!res.ok) throw new Error('EmailJS HTTP ' + res.status + ': ' + await res.text());
+  }
+
   async function fContact(e) {
     e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
     try {
       const name    = document.getElementById('contact-name').value.trim();
       const email   = document.getElementById('contact-email').value.trim();
@@ -1067,38 +1083,40 @@
         msgs.unshift({ id: Date.now(), name, email, phone, service, message, read: false, date });
         aSave('messages', msgs);
       }
-      await emailjs.send('service_njiwkzq', 'template_32rsbqa', {
-        from_name: name, from_email: email,
-        phone: phone || 'Not provided',
-        service: service || 'Not specified',
-        message: message
-      });
+      await sendEmail({ from_name: name, from_email: email, phone: phone || 'Not provided', service: service || 'Not specified', message });
       toast("Message sent! We'll be in touch within 24 hours.");
       e.target.reset();
     } catch(err) {
-      console.error('Form error:', err);
-      alert('Error sending message: ' + (err.text || err.message || JSON.stringify(err)));
+      alert('Send failed: ' + err.message);
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Send Message &nbsp;<i class="ri-send-plane-line"></i>'; }
     }
   }
+
   async function fQuote(e) {
     e.preventDefault();
-    const name    = document.getElementById('quote-name').value.trim();
-    const email   = document.getElementById('quote-email').value.trim();
-    const phone   = document.getElementById('quote-phone').value.trim();
-    const service = document.getElementById('quote-svc-select').value;
-    const desc    = document.getElementById('quote-desc').value.trim();
-    const date    = new Date().toISOString().split('T')[0];
-    const quotes = aData('quotes', []);
-    quotes.unshift({ id: Date.now(), name, email, phone, service, description: desc, status: 'new', date });
-    aSave('quotes', quotes);
-    emailjs.send('service_njiwkzq', 'template_32rsbqa', {
-      from_name: name, from_email: email,
-      phone: phone || 'Not provided',
-      service: service || 'Not specified',
-      message: 'QUOTE REQUEST\n\n' + desc
-    }).catch(err => console.warn('EmailJS:', err));
-    toast("Quote request received! We'll respond within 24 hours.");
-    e.target.reset();
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    try {
+      const name    = document.getElementById('quote-name').value.trim();
+      const email   = document.getElementById('quote-email').value.trim();
+      const phone   = document.getElementById('quote-phone').value.trim();
+      const service = document.getElementById('quote-svc-select').value;
+      const desc    = document.getElementById('quote-desc').value.trim();
+      const date    = new Date().toISOString().split('T')[0];
+      if (typeof aData === 'function') {
+        const quotes = aData('quotes', []);
+        quotes.unshift({ id: Date.now(), name, email, phone, service, description: desc, status: 'new', date });
+        aSave('quotes', quotes);
+      }
+      await sendEmail({ from_name: name, from_email: email, phone: phone || 'Not provided', service: service || 'Not specified', message: 'QUOTE REQUEST\n\n' + desc });
+      toast("Quote request received! We'll respond within 24 hours.");
+      e.target.reset();
+    } catch(err) {
+      alert('Send failed: ' + err.message);
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Submit Quote Request &nbsp;<i class="ri-arrow-right-line"></i>'; }
+    }
   }
 
   function toast(msg) {
