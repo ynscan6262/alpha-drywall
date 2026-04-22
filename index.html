@@ -1000,6 +1000,9 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
     syncNav(page);
     refreshReveal();
+    if ((page === 'contact' || page === 'quote') && typeof updateServiceDropdowns === 'function') {
+      updateServiceDropdowns();
+    }
   }
 
   function syncNav(page) {
@@ -1502,6 +1505,7 @@ function renderGalleryPage() {
 
 function updateServiceDropdowns() {
   const svcs = aData('services', []).filter(s => s.active).map(s => s.title);
+  if (!svcs.length) return;
   [['contact-svc-select', false], ['quote-svc-select', true]].forEach(([id, addOther]) => {
     const el = document.getElementById(id);
     if (!el) return;
