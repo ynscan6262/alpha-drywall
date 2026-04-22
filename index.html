@@ -11,7 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init('8t95T81CsTUvRwZ-J');</script>
+  <script>emailjs.init({ publicKey: '8t95T81CsTUvRwZ-J' });</script>
   <script>
     tailwind.config = {
       theme: {
@@ -1055,23 +1055,30 @@
   // ── Forms ──────────────────────────────────────────────────
   async function fContact(e) {
     e.preventDefault();
-    const name    = document.getElementById('contact-name').value.trim();
-    const email   = document.getElementById('contact-email').value.trim();
-    const phone   = document.getElementById('contact-phone').value.trim();
-    const service = document.getElementById('contact-svc-select').value;
-    const message = document.getElementById('contact-message').value.trim();
-    const date    = new Date().toISOString().split('T')[0];
-    const msgs = aData('messages', []);
-    msgs.unshift({ id: Date.now(), name, email, phone, service, message, read: false, date });
-    aSave('messages', msgs);
-    emailjs.send('service_njiwkzq', 'template_32rsbqa', {
-      from_name: name, from_email: email,
-      phone: phone || 'Not provided',
-      service: service || 'Not specified',
-      message: message
-    }).catch(err => console.warn('EmailJS:', err));
-    toast("Message sent! We'll be in touch within 24 hours.");
-    e.target.reset();
+    try {
+      const name    = document.getElementById('contact-name').value.trim();
+      const email   = document.getElementById('contact-email').value.trim();
+      const phone   = document.getElementById('contact-phone').value.trim();
+      const service = document.getElementById('contact-svc-select').value;
+      const message = document.getElementById('contact-message').value.trim();
+      const date    = new Date().toISOString().split('T')[0];
+      if (typeof aData === 'function') {
+        const msgs = aData('messages', []);
+        msgs.unshift({ id: Date.now(), name, email, phone, service, message, read: false, date });
+        aSave('messages', msgs);
+      }
+      await emailjs.send('service_njiwkzq', 'template_32rsbqa', {
+        from_name: name, from_email: email,
+        phone: phone || 'Not provided',
+        service: service || 'Not specified',
+        message: message
+      });
+      toast("Message sent! We'll be in touch within 24 hours.");
+      e.target.reset();
+    } catch(err) {
+      console.error('Form error:', err);
+      alert('Error sending message: ' + (err.text || err.message || JSON.stringify(err)));
+    }
   }
   async function fQuote(e) {
     e.preventDefault();
