@@ -10,6 +10,8 @@
   <link href="https://unpkg.com/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('8t95T81CsTUvRwZ-J');</script>
   <script>
     tailwind.config = {
       theme: {
@@ -760,17 +762,17 @@
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Full Name *</label>
-                <input type="text" class="f-input" placeholder="John Smith" required>
+                <input id="contact-name" type="text" class="f-input" placeholder="John Smith" required>
               </div>
               <div>
                 <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Email Address *</label>
-                <input type="email" class="f-input" placeholder="john@example.com" required>
+                <input id="contact-email" type="email" class="f-input" placeholder="john@example.com" required>
               </div>
             </div>
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Phone Number</label>
-                <input type="tel" class="f-input" placeholder="(416) 555-0000">
+                <input id="contact-phone" type="tel" class="f-input" placeholder="(416) 555-0000">
               </div>
               <div>
                 <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Service Interested In</label>
@@ -785,7 +787,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Message *</label>
-              <textarea class="f-input" style="height:140px;resize:none;" placeholder="Tell us about your project…" required></textarea>
+              <textarea id="contact-message" class="f-input" style="height:140px;resize:none;" placeholder="Tell us about your project…" required></textarea>
             </div>
             <button type="submit" class="w-full bg-primary hover:bg-blue-400 text-white py-4 rounded-lg font-black text-sm transition-all shadow-lg shadow-primary/25">
               Send Message &nbsp;<i class="ri-send-plane-line"></i>
@@ -869,17 +871,17 @@
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
               <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Full Name *</label>
-              <input type="text" class="f-input" placeholder="John Smith" required>
+              <input id="quote-name" type="text" class="f-input" placeholder="John Smith" required>
             </div>
             <div>
               <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Email *</label>
-              <input type="email" class="f-input" placeholder="john@example.com" required>
+              <input id="quote-email" type="email" class="f-input" placeholder="john@example.com" required>
             </div>
           </div>
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
               <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Phone</label>
-              <input type="tel" class="f-input" placeholder="(416) 555-0000">
+              <input id="quote-phone" type="tel" class="f-input" placeholder="(416) 555-0000">
             </div>
             <div>
               <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Service Type *</label>
@@ -894,7 +896,7 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-darktext mb-2 tracking-wide uppercase">Project Description *</label>
-            <textarea class="f-input" style="height:120px;resize:none;" placeholder="Describe your project — size, current state, desired outcome…" required></textarea>
+            <textarea id="quote-desc" class="f-input" style="height:120px;resize:none;" placeholder="Describe your project — size, current state, desired outcome…" required></textarea>
           </div>
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
@@ -1048,13 +1050,43 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
   // ── Forms ──────────────────────────────────────────────────
-  function fContact(e) {
+  async function fContact(e) {
     e.preventDefault();
+    const name    = document.getElementById('contact-name').value.trim();
+    const email   = document.getElementById('contact-email').value.trim();
+    const phone   = document.getElementById('contact-phone').value.trim();
+    const service = document.getElementById('contact-svc-select').value;
+    const message = document.getElementById('contact-message').value.trim();
+    const date    = new Date().toISOString().split('T')[0];
+    const msgs = aData('messages', []);
+    msgs.unshift({ id: Date.now(), name, email, phone, service, message, read: false, date });
+    aSave('messages', msgs);
+    emailjs.send('service_njiwkzq', 'template_32rsbqa', {
+      from_name: name, from_email: email,
+      phone: phone || 'Not provided',
+      service: service || 'Not specified',
+      message: message
+    }).catch(err => console.warn('EmailJS:', err));
     toast("Message sent! We'll be in touch within 24 hours.");
     e.target.reset();
   }
-  function fQuote(e) {
+  async function fQuote(e) {
     e.preventDefault();
+    const name    = document.getElementById('quote-name').value.trim();
+    const email   = document.getElementById('quote-email').value.trim();
+    const phone   = document.getElementById('quote-phone').value.trim();
+    const service = document.getElementById('quote-svc-select').value;
+    const desc    = document.getElementById('quote-desc').value.trim();
+    const date    = new Date().toISOString().split('T')[0];
+    const quotes = aData('quotes', []);
+    quotes.unshift({ id: Date.now(), name, email, phone, service, description: desc, status: 'new', date });
+    aSave('quotes', quotes);
+    emailjs.send('service_njiwkzq', 'template_32rsbqa', {
+      from_name: name, from_email: email,
+      phone: phone || 'Not provided',
+      service: service || 'Not specified',
+      message: 'QUOTE REQUEST\n\n' + desc
+    }).catch(err => console.warn('EmailJS:', err));
     toast("Quote request received! We'll respond within 24 hours.");
     e.target.reset();
   }
