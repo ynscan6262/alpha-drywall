@@ -54,6 +54,7 @@
   <link href="https://unpkg.com/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>emailjs.init({ publicKey: '8t95T81CsTUvRwZ-J' });</script>
   <script>
@@ -1694,7 +1695,7 @@ async function seedDemo() {
 function openAdmin() {
   document.getElementById('admin-root').style.display = 'block';
   document.body.style.overflow = 'hidden';
-  if (sessionStorage.getItem('alpha_admin_logged_in')) {
+  if (firebase.auth().currentUser) {
     showAdminMain();
   } else {
     document.getElementById('admin-login').style.display = 'flex';
@@ -1708,17 +1709,13 @@ function closeAdmin() {
 function adminLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-pass').value;
-  const correctPass = aData('admin_pass', 'admin123');
-  if (email === 'admin@alphadrywall.com' && pass === correctPass) {
-    sessionStorage.setItem('alpha_admin_logged_in', '1');
-    document.getElementById('login-error').style.display = 'none';
-    showAdminMain();
-  } else {
-    document.getElementById('login-error').style.display = 'block';
-  }
+  document.getElementById('login-error').style.display = 'none';
+  firebase.auth().signInWithEmailAndPassword(email, pass)
+    .then(() => showAdminMain())
+    .catch(() => { document.getElementById('login-error').style.display = 'block'; });
 }
 function adminLogout() {
-  sessionStorage.removeItem('alpha_admin_logged_in');
+  firebase.auth().signOut();
   document.getElementById('admin-main').style.display = 'none';
   document.getElementById('admin-login').style.display = 'flex';
 }
@@ -2442,10 +2439,13 @@ function changePassword() {
   if (!np) { alert('Please enter a new password.'); return; }
   if (np !== cp) { alert('Passwords do not match.'); return; }
   if (np.length < 6) { alert('Password must be at least 6 characters.'); return; }
-  aSave('admin_pass', np);
-  document.getElementById('s-newpass').value = '';
-  document.getElementById('s-confirmpass').value = '';
-  adminToast('Password updated!');
+  firebase.auth().currentUser.updatePassword(np)
+    .then(() => {
+      document.getElementById('s-newpass').value = '';
+      document.getElementById('s-confirmpass').value = '';
+      adminToast('Password updated!');
+    })
+    .catch(e => alert('Error: ' + e.message + ' (log out and back in, then try again)'));
 }
 
 // ═══════════════ TOAST ═══════════════
