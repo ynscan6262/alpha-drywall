@@ -247,6 +247,23 @@
     /* Logo SVG text fix */
     .logo-svg text { dominant-baseline: auto; }
     .logo-img { display: block; }
+
+    /* Service image carousel */
+    .svc-carousel { position: relative; overflow: hidden; }
+    .svc-carousel img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.35s ease; }
+    .svc-car-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 38px; height: 38px; border-radius: 50%; border: none;
+      background: rgba(0,0,0,0.38); color: #fff; display: flex;
+      align-items: center; justify-content: center; cursor: pointer;
+      font-size: 20px; z-index: 5; transition: background 0.2s;
+    }
+    .svc-car-btn:hover { background: rgba(0,0,0,0.62); }
+    .svc-car-prev { left: 14px; }
+    .svc-car-next { right: 14px; }
+    .svc-car-dots { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; z-index: 5; }
+    .svc-car-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: background 0.2s, width 0.2s; }
+    .svc-car-dot.active { background: #fff; width: 16px; border-radius: 3px; }
   </style>
 </head>
 <body class="bg-white">
@@ -613,15 +630,21 @@
             </ul>
             <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
           </div>
-          <div class="min-h-[280px] lg:min-h-0">
-            <img src="1743102911689.jpeg" alt="Drywall Installation" class="w-full h-full object-cover">
+          <div class="min-h-[280px] lg:min-h-0 svc-carousel" data-images='["1743102911689.jpeg","1743102912971.jpeg","1743102914968.jpeg","1743102917963.jpeg","drywall-work.jpg"]'>
+            <img src="1743102911689.jpeg" alt="Drywall Installation">
+            <button class="svc-car-btn svc-car-prev" onclick="svcCarNav(this,-1)"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="svc-car-btn svc-car-next" onclick="svcCarNav(this,1)"><i class="ri-arrow-right-s-line"></i></button>
+            <div class="svc-car-dots"></div>
           </div>
         </div>
 
         <!-- Row 2 -->
         <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-right">
-          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
-            <img src="duvar-profil.jpg" alt="Framing" class="w-full h-full object-cover">
+          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1 svc-carousel" data-images='["duvar-profil.jpg","wall-construction.jpg","whatsapp-0.jpg","whatsapp-1.jpg","whatsapp-3.jpg"]'>
+            <img src="duvar-profil.jpg" alt="Framing">
+            <button class="svc-car-btn svc-car-prev" onclick="svcCarNav(this,-1)"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="svc-car-btn svc-car-next" onclick="svcCarNav(this,1)"><i class="ri-arrow-right-s-line"></i></button>
+            <div class="svc-car-dots"></div>
           </div>
           <div class="p-10 md:p-12 order-1 lg:order-2">
             <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-building-4-line text-xl text-primary"></i></div>
@@ -656,8 +679,11 @@
             </ul>
             <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
           </div>
-          <div class="min-h-[280px] lg:min-h-0">
-            <img src="jason.jpg" alt="Taping and Mudding" class="w-full h-full object-cover">
+          <div class="min-h-[280px] lg:min-h-0 svc-carousel" data-images='["jason.jpg","1743102912283.jpeg","gallery-1.jpg","gallery-2.jpg"]'>
+            <img src="jason.jpg" alt="Taping and Mudding">
+            <button class="svc-car-btn svc-car-prev" onclick="svcCarNav(this,-1)"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="svc-car-btn svc-car-next" onclick="svcCarNav(this,1)"><i class="ri-arrow-right-s-line"></i></button>
+            <div class="svc-car-dots"></div>
           </div>
         </div>
 
@@ -665,8 +691,11 @@
 
         <!-- Row 4 -->
         <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-right">
-          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
-            <img src="basement-remodel.jpg" alt="Basement Renovation" class="w-full h-full object-cover">
+          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1 svc-carousel" data-images='["basement-remodel.jpg","building-process.jpg","gallery-3.jpg","gallery-4.jpg"]'>
+            <img src="basement-remodel.jpg" alt="Basement Renovation">
+            <button class="svc-car-btn svc-car-prev" onclick="svcCarNav(this,-1)"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="svc-car-btn svc-car-next" onclick="svcCarNav(this,1)"><i class="ri-arrow-right-s-line"></i></button>
+            <div class="svc-car-dots"></div>
           </div>
           <div class="p-10 md:p-12 order-1 lg:order-2">
             <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-home-4-line text-xl text-primary"></i></div>
@@ -698,15 +727,21 @@
             </ul>
             <button onclick="go('quote')" class="bg-primary hover:bg-blue-400 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all">Get a Quote</button>
           </div>
-          <div class="min-h-[280px] lg:min-h-0">
-            <img src="interior-home.jpg" alt="Interior Renovation" class="w-full h-full object-cover">
+          <div class="min-h-[280px] lg:min-h-0 svc-carousel" data-images='["interior-home.jpg","relaxed-curves.jpg","vip-lounge.jpg","gallery-5.jpg"]'>
+            <img src="interior-home.jpg" alt="Interior Renovation">
+            <button class="svc-car-btn svc-car-prev" onclick="svcCarNav(this,-1)"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="svc-car-btn svc-car-next" onclick="svcCarNav(this,1)"><i class="ri-arrow-right-s-line"></i></button>
+            <div class="svc-car-dots"></div>
           </div>
         </div>
 
         <!-- Row 6 -->
         <div class="srv-row grid lg:grid-cols-2 rounded-2xl overflow-hidden bg-offwhite reveal-right">
-          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1">
-            <img src="exterior-renovation.jpg" alt="Exterior Renovation" class="w-full h-full object-cover">
+          <div class="min-h-[280px] lg:min-h-0 order-2 lg:order-1 svc-carousel" data-images='["exterior-renovation.jpg","city-solo.jpg","jobsite-photo.jpg","photo-extra.jpg"]'>
+            <img src="exterior-renovation.jpg" alt="Exterior Renovation">
+            <button class="svc-car-btn svc-car-prev" onclick="svcCarNav(this,-1)"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="svc-car-btn svc-car-next" onclick="svcCarNav(this,1)"><i class="ri-arrow-right-s-line"></i></button>
+            <div class="svc-car-dots"></div>
           </div>
           <div class="p-10 md:p-12 order-1 lg:order-2">
             <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5"><i class="ri-home-smile-line text-xl text-primary"></i></div>
@@ -1506,6 +1541,27 @@ function applyDynamic() {
   renderGalleryPage();
   updateServiceDropdowns();
 }
+
+// ═══════════════ SERVICE IMAGE CAROUSELS ═══════════════
+function svcCarInitDots(wrap) {
+  const imgs = JSON.parse(wrap.dataset.images);
+  const dots = wrap.querySelector('.svc-car-dots');
+  if (!dots || imgs.length < 2) return;
+  const idx = parseInt(wrap.dataset.idx || '0', 10);
+  dots.innerHTML = imgs.map((_, i) => `<span class="svc-car-dot${i === idx ? ' active' : ''}"></span>`).join('');
+}
+function svcCarNav(btn, dir) {
+  const wrap = btn.closest('.svc-carousel');
+  const imgs = JSON.parse(wrap.dataset.images);
+  let idx = parseInt(wrap.dataset.idx || '0', 10);
+  idx = (idx + dir + imgs.length) % imgs.length;
+  wrap.dataset.idx = idx;
+  wrap.querySelector('img').src = imgs[idx];
+  svcCarInitDots(wrap);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.svc-carousel').forEach(svcCarInitDots);
+});
 
 // ═══════════════ DYNAMIC PAGE RENDERERS ═══════════════
 
